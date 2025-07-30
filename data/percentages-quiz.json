@@ -1,0 +1,105 @@
+{
+  "title": "Percentages - 11+ Practice",
+  "questions": [
+    {
+      "question": "What is 25% of 80?",
+      "options": [
+        "15",
+        "20",
+        "25",
+        "30"
+      ],
+      "correctAnswer": "20"
+    },
+    {
+      "question": "Express 3/4 as a percentage.",
+      "options": [
+        "70%",
+        "75%",
+        "80%",
+        "85%"
+      ],
+      "correctAnswer": "75%"
+    },
+    {
+      "question": "A shirt costs £40. If there's a 15% discount, what is the sale price?",
+      "options": [
+        "£34",
+        "£35",
+        "£36",
+        "£37"
+      ],
+      "correctAnswer": "£34"
+    },
+    {
+      "question": "In a class of 30 students, 18 are girls. What percentage are girls?",
+      "options": [
+        "55%",
+        "60%",
+        "65%",
+        "70%"
+      ],
+      "correctAnswer": "60%"
+    },
+    {
+      "question": "What is 12% of 250?",
+      "options": [
+        "25",
+        "30",
+        "35",
+        "40"
+      ],
+      "correctAnswer": "30"
+    },
+    {
+      "question": "A football team won 16 out of 20 matches. What percentage did they win?",
+      "options": [
+        "75%",
+        "80%",
+        "85%",
+        "90%"
+      ],
+      "correctAnswer": "80%"
+    },
+    {
+      "question": "Express 0.45 as a percentage.",
+      "options": [
+        "4.5%",
+        "45%",
+        "450%",
+        "0.45%"
+      ],
+      "correctAnswer": "45%"
+    },
+    {
+      "question": "A book originally costs £25. After a 20% increase, what is the new price?",
+      "options": [
+        "£28",
+        "£29",
+        "£30",
+        "£31"
+      ],
+      "correctAnswer": "£30"
+    },
+    {
+      "question": "What percentage is 17 out of 50?",
+      "options": [
+        "32%",
+        "34%",
+        "36%",
+        "38%"
+      ],
+      "correctAnswer": "34%"
+    },
+    {
+      "question": "A school has 480 pupils. If 35% are in Year 6, how many Year 6 pupils are there?",
+      "options": [
+        "158",
+        "168",
+        "178",
+        "188"
+      ],
+      "correctAnswer": "168"
+    }
+  ]
+}
