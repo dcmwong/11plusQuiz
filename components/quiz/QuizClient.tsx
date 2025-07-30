@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { FC } from 'react';
 import { getFeedback } from '@/app/actions';
 import type { FeedbackInput } from '@/ai/flows/personalized-feedback';
@@ -10,6 +10,7 @@ import { ResultsCard } from './ResultsCard';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, ArrowLeft, ArrowRight } from 'lucide-react';
+import { createQuizSession, saveQuizAnswer, completeQuizSession } from '@/lib/firebase/quizService';
 
 interface Question {
   question: string;
@@ -27,7 +28,6 @@ interface QuizClientProps {
 }
 
 export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
-  console.log(quizData)
   const { title, questions } = quizData;
   const { toast } = useToast();
 
@@ -37,9 +37,57 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState('');
   const [loadingFeedback, setLoadingFeedback] = useState(false);
+  const [sessionId, setSessionId] = useState<string | null>(null);
+  const [isCreatingSession, setIsCreatingSession] = useState(true);
 
   const currentQuestion = useMemo(() => questions[currentQuestionIndex], [questions, currentQuestionIndex]);
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
+
+  // Create quiz session when component mounts
+  useEffect(() => {
+    const initializeSession = async () => {
+      try {
+        const newSessionId = await createQuizSession('quiz-' + Date.now(), title, questions.length);
+        setSessionId(newSessionId);
+        setIsCreatingSession(false);
+        toast({
+          title: 'Quiz Started!',
+          description: 'Your progress will be automatically saved.',
+        });
+      } catch (error) {
+        console.error('Failed to create session:', error);
+        toast({
+          title: 'Warning',
+          description: 'Could not create session. Your progress may not be saved.',
+          variant: 'destructive',
+        });
+        setIsCreatingSession(false);
+      }
+    };
+
+    initializeSession();
+  }, [title, questions.length, toast]);
+
+  // Save answer whenever an answer is selected
+  useEffect(() => {
+    const saveAnswer = async () => {
+      if (sessionId && answers[currentQuestionIndex] && currentQuestion) {
+        try {
+          await saveQuizAnswer(
+            sessionId,
+            currentQuestionIndex,
+            currentQuestion.question,
+            answers[currentQuestionIndex],
+            currentQuestion.correctAnswer
+          );
+        } catch (error) {
+          console.error('Failed to save answer:', error);
+        }
+      }
+    };
+
+    saveAnswer();
+  }, [answers, currentQuestionIndex, sessionId, currentQuestion]);
 
   const handleAnswerSelect = (answer: string) => {
     setAnswers((prev) => ({ ...prev, [currentQuestionIndex]: answer }));
@@ -81,6 +129,32 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
     try {
       const result = await getFeedback(feedbackInput);
       setFeedback(result.feedback);
+      
+      // Save complete quiz results to database
+      if (sessionId) {
+        try {
+          await completeQuizSession(
+            sessionId,
+            'quiz-' + Date.now(),
+            title,
+            answers,
+            questions,
+            calculatedScore,
+            result.feedback
+          );
+          toast({
+            title: 'Quiz Completed!',
+            description: 'Your results have been saved successfully.',
+          });
+        } catch (error) {
+          console.error('Failed to save quiz results:', error);
+          toast({
+            title: 'Warning',
+            description: 'Quiz completed but results could not be saved.',
+            variant: 'destructive',
+          });
+        }
+      }
     } catch (error) {
       console.error(error);
       toast({
