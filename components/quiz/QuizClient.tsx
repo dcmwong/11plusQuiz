@@ -1,0 +1,166 @@
+
+'use client';
+
+import { useState, useMemo } from 'react';
+import type { FC } from 'react';
+import { getFeedback } from '@/app/actions';
+import type { FeedbackInput } from '@/ai/flows/personalized-feedback';
+import { QuestionCard } from './QuestionCard';
+import { ResultsCard } from './ResultsCard';
+import { Button } from '@/components/ui/button';
+import { useToast } from '@/hooks/use-toast';
+import { Loader2, ArrowLeft, ArrowRight } from 'lucide-react';
+
+interface Question {
+  question: string;
+  options: string[];
+  correctAnswer: string;
+}
+
+interface QuizData {
+  title: string;
+  questions: Question[];
+}
+
+interface QuizClientProps {
+  quizData: QuizData;
+}
+
+export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
+  console.log(quizData)
+  const { title, questions } = quizData;
+  const { toast } = useToast();
+
+  const [answers, setAnswers] = useState<Record<number, string>>({});
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [isFinished, setIsFinished] = useState(false);
+  const [score, setScore] = useState(0);
+  const [feedback, setFeedback] = useState('');
+  const [loadingFeedback, setLoadingFeedback] = useState(false);
+
+  const currentQuestion = useMemo(() => questions[currentQuestionIndex], [questions, currentQuestionIndex]);
+  const isLastQuestion = currentQuestionIndex === questions.length - 1;
+
+  const handleAnswerSelect = (answer: string) => {
+    setAnswers((prev) => ({ ...prev, [currentQuestionIndex]: answer }));
+  };
+
+  const handleNext = () => {
+    if (!isLastQuestion) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex((prev) => prev - 1);
+    }
+  };
+
+  const handleFinish = async () => {
+    setLoadingFeedback(true);
+
+    let calculatedScore = 0;
+    questions.forEach((q, index) => {
+      if (answers[index] === q.correctAnswer) {
+        calculatedScore++;
+      }
+    });
+    setScore(calculatedScore);
+
+    const feedbackInput: FeedbackInput = {
+      quizName: title,
+      questions: questions.map((q, index) => ({
+        question: q.question,
+        options: q.options,
+        correctAnswer: q.correctAnswer,
+        userAnswer: answers[index] || 'Not answered',
+      })),
+    };
+
+    try {
+      const result = await getFeedback(feedbackInput);
+      setFeedback(result.feedback);
+    } catch (error) {
+      console.error(error);
+      toast({
+        title: 'Error',
+        description: 'Could not generate feedback. Please try again.',
+        variant: 'destructive',
+      });
+    } finally {
+      setIsFinished(true);
+      setLoadingFeedback(false);
+    }
+  };
+
+  const handleRestart = () => {
+    setAnswers({});
+    setCurrentQuestionIndex(0);
+    setIsFinished(false);
+    setScore(0);
+    setFeedback('');
+  };
+
+  if (isFinished) {
+    return (
+      <ResultsCard
+        questions={questions}
+        answers={answers}
+        score={score}
+        feedback={feedback}
+        onRestart={handleRestart}
+      />
+    );
+  }
+
+  return (
+    <div className="w-full">
+      <div key={currentQuestionIndex}>
+        <QuestionCard
+          question={currentQuestion}
+          questionIndex={currentQuestionIndex}
+          totalQuestions={questions.length}
+          selectedAnswer={answers[currentQuestionIndex]}
+          onAnswerSelect={handleAnswerSelect}
+          isSubmitting={loadingFeedback}
+        />
+      </div>
+
+      <div className="flex justify-between mt-8 max-w-2xl mx-auto">
+        <Button
+          onClick={handlePrevious}
+          disabled={currentQuestionIndex === 0 || loadingFeedback}
+          variant="outline"
+          size="lg"
+        >
+          <ArrowLeft className="mr-2 h-5 w-5" />
+          Previous
+        </Button>
+
+        {isLastQuestion ? (
+          <Button
+            onClick={handleFinish}
+            disabled={loadingFeedback || !answers[currentQuestionIndex]}
+            size="lg"
+            className="bg-accent hover:bg-accent/90 text-accent-foreground"
+          >
+            {loadingFeedback ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Generating Results...
+              </>
+            ) : (
+              'Finish Quiz'
+            )}
+          </Button>
+        ) : (
+          <Button onClick={handleNext} disabled={loadingFeedback || !answers[currentQuestionIndex]} size="lg">
+            Next
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+        )}
+      </div>
+    </div>
+  );
+};

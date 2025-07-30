@@ -1,0 +1,107 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# ide
+.idea/
+.ignore/
+.venv
+.DS_Store
+
+# dependencies
+node_modules
+.next
+lib/firebase/init.ts
+
+# testing
+**/coverage
+**/reports/
+
+# ignore package audit reports
+/documentation/package-audit/*.json
+
+# typescript
+*.js.map
+*.map
+*.js
+tsconfig.tsbuildinfo
+
+# misc
+.DS_Store
+
+# Editor temporary files
+*~undo-tree~
+**/.#*
+
+# sst build output -- include types in the build output
+**/.build/
+**/.sst/artifacts
+**/.sst/cache
+**/.sst/dist
+**/.sst/platform
+**/.sst/.pulumi
+**/.sst/log
+**/.sst/*.server
+**/.sst/types
+**/.sst/types.generated.ts
+**/.sst/Pulumi*
+**/.sst/debug*
+**/.sst/stage
+**/.sst/esbuild.json
+**/.sst/outputs.json
+**/cdk.context.json
+**/.sst.config.*.mjs
+**/.sst/localhost.pem
+**/.sst/localhost-key.pem
+
+# environments
+.env.*
+!.env.dev
+!.env.qa
+!.env.sandbox
+!.env.uat
+!.env.nfr
+!.env.prod
+**/test/.env
+
+# task runners
+Taskfile.yaml
+Taskfile.yml
+
+# local environment config files
+devbox.json
+.envrc
+.rtx.toml
+request-collection/environments
+
+*-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+**/.pnp.*
+**/.yarn/*
+!**/.yarn/patches
+!**/.yarn/plugins
+!**/.yarn/releases
+!**/.yarn/sdks
+!**/.yarn/versions
+honeycomb/.sst/.env
+honeycomb/src/platforms/frontend/tsconfig.tsbuildinfo
+
+
+# e2e tests 
+apps/e2e-tests/cc-e2e-tests/test-results
+apps/e2e-tests/cc-e2e-tests/playwright-report
+apps/e2e-tests/rms-backend-tests/test-results
+.auth/user.json
+
+
+# colony cli
+test-users.json
+
+
+# Performance
+apps/e2e-tests/performance/dist/*
+apps/e2e-tests/performance/reports/*
+
+#ctrf
+test-results
+**/test-results

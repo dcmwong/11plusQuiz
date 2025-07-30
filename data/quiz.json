@@ -1,0 +1,55 @@
+{
+  "title": "Fun Science Facts",
+  "questions": [
+    {
+      "question": "Anotherk",
+      "options": [
+        "Earth",
+        "Mars",
+        "Jupiter",
+        "Saturn"
+      ],
+      "correctAnswer": "Jupiter"
+    },
+    {
+      "question": "What is the chemical symbol for water?",
+      "options": [
+        "H2O",
+        "O2",
+        "CO2",
+        "NaCl"
+      ],
+      "correctAnswer": "H2O"
+    },
+    {
+      "question": "What is the speed of light?",
+      "options": [
+        "300,000 km/s",
+        "150,000 km/s",
+        "500,000 km/s",
+        "1,000,000 km/s"
+      ],
+      "correctAnswer": "300,000 km/s"
+    },
+    {
+      "question": "What is the smallest unit of matter?",
+      "options": [
+        "Molecule",
+        "Atom",
+        "Proton",
+        "Electron"
+      ],
+      "correctAnswer": "Atom"
+    },
+    {
+      "question": "How many bones are in the adult human body?",
+      "options": [
+        "206",
+        "150",
+        "301",
+        "256"
+      ],
+      "correctAnswer": "206"
+    }
+  ]
+}
