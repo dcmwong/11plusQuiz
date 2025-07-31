@@ -1,4 +1,4 @@
-import { collection, addDoc, updateDoc, doc, getDoc, getFirestore, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc, getDoc, getFirestore, serverTimestamp, Timestamp, query, where, orderBy, getDocs } from 'firebase/firestore';
 import { app } from './init';
 
 const db = getFirestore(app);
@@ -29,6 +29,7 @@ export interface QuizSession {
 
 export interface QuizResult {
   sessionId: string;
+  userId: string;
   quizId: string;
   quizTitle: string;
   score: number;
@@ -54,7 +55,7 @@ export async function createQuizSession(userId: string, quizId: string, quizTitl
     };
 
     const docRef = await addDoc(collection(db, 'quizSessions'), sessionData);
-    console.log('✅ Quiz session created with ID:', docRef.id);
+    console.log(`✅ Quiz session created with ID: ${docRef.id} for user: ${userId}`);
     return docRef.id;
   } catch (error) {
     console.error('❌ Error creating quiz session:', error);
@@ -150,6 +151,7 @@ export async function completeQuizSession(
 
     // Create a separate results record for easier querying
     const resultData: Omit<QuizResult, 'sessionId'> = {
+      userId: sessionData.userId, // Include userId from session data
       quizId,
       quizTitle,
       score,
@@ -166,10 +168,118 @@ export async function completeQuizSession(
       sessionId
     });
 
-    console.log(`✅ Quiz completed in ${timeTaken}s and results saved with ID:`, resultRef.id);
+    console.log(`✅ Quiz completed in ${timeTaken}s and results saved with ID: ${resultRef.id} for user: ${sessionData.userId}`);
     return resultRef.id;
   } catch (error) {
     console.error('❌ Error completing quiz session:', error);
+    throw error;
+  }
+}
+
+// Get all quiz results for a specific user
+export async function getUserQuizResults(userId: string): Promise<QuizResult[]> {
+  try {
+    console.log('🔍 Fetching quiz results for user:', userId);
+    
+    // Try with just where clause first, then sort in memory if needed
+    const resultsQuery = query(
+      collection(db, 'quizResults'),
+      where('userId', '==', userId)
+    );
+    
+    const snapshot = await getDocs(resultsQuery);
+    console.log('📊 Found', snapshot.docs.length, 'results');
+    
+    const results = snapshot.docs.map(doc => ({ 
+      ...doc.data(), 
+      sessionId: doc.id // Use doc.id as sessionId if not present in data
+    } as QuizResult));
+    
+    // Sort by completedAt in memory (descending - newest first)
+    results.sort((a, b) => {
+      const aTime = a.completedAt?.toDate?.()?.getTime() || 0;
+      const bTime = b.completedAt?.toDate?.()?.getTime() || 0;
+      return bTime - aTime;
+    });
+    
+    return results;
+  } catch (error) {
+    console.error('❌ Error fetching user quiz results:', error);
+    throw error;
+  }
+}
+
+// Get all quiz sessions for a specific user
+export async function getUserQuizSessions(userId: string, includeIncomplete: boolean = false): Promise<QuizSession[]> {
+  try {
+    console.log('🔍 Fetching quiz sessions for user:', userId, 'includeIncomplete:', includeIncomplete);
+    
+    // Start with basic query
+    let sessionQuery = query(
+      collection(db, 'quizSessions'),
+      where('userId', '==', userId)
+    );
+    
+    const snapshot = await getDocs(sessionQuery);
+    console.log('📊 Found', snapshot.docs.length, 'sessions');
+    
+    let sessions = snapshot.docs.map(doc => ({ 
+      ...doc.data(), 
+      id: doc.id 
+    } as QuizSession));
+    
+    // Filter completed sessions in memory if needed
+    if (!includeIncomplete) {
+      sessions = sessions.filter(session => session.isCompleted === true);
+    }
+    
+    // Sort by startedAt in memory (descending - newest first)
+    sessions.sort((a, b) => {
+      const aTime = a.startedAt?.toDate?.()?.getTime() || 0;
+      const bTime = b.startedAt?.toDate?.()?.getTime() || 0;
+      return bTime - aTime;
+    });
+    
+    return sessions;
+  } catch (error) {
+    console.error('❌ Error fetching user quiz sessions:', error);
+    throw error;
+  }
+}
+
+// Get user's quiz statistics
+export async function getUserQuizStats(userId: string): Promise<{
+  totalQuizzes: number;
+  averageScore: number;
+  totalTimePlayed: number;
+  bestScore: QuizResult | null;
+}> {
+  try {
+    const results = await getUserQuizResults(userId);
+    
+    if (results.length === 0) {
+      return {
+        totalQuizzes: 0,
+        averageScore: 0,
+        totalTimePlayed: 0,
+        bestScore: null
+      };
+    }
+    
+    const totalScore = results.reduce((sum, result) => sum + result.percentage, 0);
+    const totalTime = results.reduce((sum, result) => sum + result.timeTaken, 0);
+    const bestScore = results.reduce((best, current) => 
+      current.percentage > (best?.percentage || 0) ? current : best
+    );
+    
+    return {
+      totalQuizzes: results.length,
+      averageScore: Math.round(totalScore / results.length),
+      totalTimePlayed: totalTime,
+      bestScore
+    };
+  } catch (error) {
+    console.error('❌ Error fetching user quiz stats:', error);
     throw error;
   }
 }
