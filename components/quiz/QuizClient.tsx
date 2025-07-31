@@ -106,7 +106,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
   };
 
   const handleFinish = async () => {
-    setLoadingFeedback(true);
+    // setLoadingFeedback(true);
 
     let calculatedScore = 0;
     questions.forEach((q, index) => {
@@ -127,9 +127,9 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
     };
 
     try {
-      const result = await getFeedback(feedbackInput);
-      setFeedback(result.feedback);
-      
+      // const result = await getFeedback(feedbackInput);
+      // setFeedback(result.feedback);
+
       // Save complete quiz results to database
       if (sessionId) {
         try {
@@ -140,7 +140,6 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
             answers,
             questions,
             calculatedScore,
-            result.feedback
           );
           toast({
             title: 'Quiz Completed!',
@@ -164,7 +163,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
       });
     } finally {
       setIsFinished(true);
-      setLoadingFeedback(false);
+      // setLoadingFeedback(false);
     }
   };
 

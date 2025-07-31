@@ -1,4 +1,4 @@
-import { collection, addDoc, updateDoc, doc, getFirestore, serverTimestamp, Timestamp } from 'firebase/firestore';
+import { collection, addDoc, updateDoc, doc, getDoc, getFirestore, serverTimestamp, Timestamp } from 'firebase/firestore';
 import { app } from './init';
 
 const db = getFirestore(app);
@@ -62,15 +62,15 @@ export async function createQuizSession(quizId: string, quizTitle: string, total
 
 // Save an individual answer
 export async function saveQuizAnswer(
-  sessionId: string, 
-  questionIndex: number, 
-  question: string, 
-  selectedAnswer: string, 
+  sessionId: string,
+  questionIndex: number,
+  question: string,
+  selectedAnswer: string,
   correctAnswer: string
 ): Promise<void> {
   try {
     const sessionRef = doc(db, 'quizSessions', sessionId);
-    
+
     const answerData: QuizAnswer = {
       questionIndex,
       question,
@@ -105,6 +105,10 @@ export async function completeQuizSession(
 ): Promise<string> {
   try {
     const sessionRef = doc(db, 'quizSessions', sessionId);
+
+    // First, get the session to retrieve the start time
+    const sessionDoc = await getDoc(sessionRef);
+    const sessionData = sessionDoc.data() as QuizSession;
     
     // Convert answers to our format
     const formattedAnswers: QuizAnswer[] = questions.map((question, index) => ({
@@ -116,36 +120,43 @@ export async function completeQuizSession(
       answeredAt: serverTimestamp() as Timestamp
     }));
 
-    const completionTime = serverTimestamp() as Timestamp;
+    const completionTime = new Date();
     
+    // Calculate time taken in seconds
+    let timeTaken = 0;
+    if (sessionData?.startedAt) {
+      const startTime = sessionData.startedAt.toDate();
+      timeTaken = Math.round((completionTime.getTime() - startTime.getTime()) / 1000);
+    }
+
     // Update the session as completed
     await updateDoc(sessionRef, {
       answers: formattedAnswers,
       score,
-      completedAt: completionTime,
+      completedAt: serverTimestamp(),
       feedback,
       isCompleted: true
     });
 
     // Create a separate results record for easier querying
-    const resultData: Omit<QuizResult, 'sessionId' | 'timeTaken'> = {
+    const resultData: Omit<QuizResult, 'sessionId'> = {
       quizId,
       quizTitle,
       score,
       totalQuestions: questions.length,
       percentage: Math.round((score / questions.length) * 100),
-      completedAt: completionTime,
+      completedAt: serverTimestamp() as Timestamp,
+      timeTaken,
       answers: formattedAnswers,
       feedback
     };
 
     const resultRef = await addDoc(collection(db, 'quizResults'), {
       ...resultData,
-      sessionId,
-      timeTaken: 0 // We'll calculate this properly when we have start time
+      sessionId
     });
 
-    console.log('✅ Quiz completed and results saved with ID:', resultRef.id);
+    console.log(`✅ Quiz completed in ${timeTaken}s and results saved with ID:`, resultRef.id);
     return resultRef.id;
   } catch (error) {
     console.error('❌ Error completing quiz session:', error);
