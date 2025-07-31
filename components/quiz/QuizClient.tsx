@@ -10,6 +10,7 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, ArrowLeft, ArrowRight } from 'lucide-react';
 import { createQuizSession, saveQuizAnswer, completeQuizSession } from '@/lib/firebase/quizService';
+import { useAuth } from '@/lib/auth/AuthContext';
 
 interface Question {
   question: string;
@@ -29,6 +30,7 @@ interface QuizClientProps {
 export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
   const { title, questions } = quizData;
   const { toast } = useToast();
+  const { user } = useAuth();
 
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -46,8 +48,10 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
   // Create quiz session when component mounts
   useEffect(() => {
     const initializeSession = async () => {
+      if (!user) return;
+      
       try {
-        const newSessionId = await createQuizSession('quiz-' + Date.now(), title, questions.length);
+        const newSessionId = await createQuizSession(user.uid, 'quiz-' + Date.now(), title, questions.length);
         setSessionId(newSessionId);
         setIsCreatingSession(false);
         toast({
@@ -66,7 +70,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
     };
 
     initializeSession();
-  }, [title, questions.length, toast]);
+  }, [user, title, questions.length, toast]);
 
   // Save answer immediately when selected (debounced to avoid excessive saves)
   useEffect(() => {

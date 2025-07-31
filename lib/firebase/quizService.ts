@@ -15,6 +15,7 @@ export interface QuizAnswer {
 
 export interface QuizSession {
   id?: string;
+  userId: string;
   quizId: string;
   quizTitle: string;
   startedAt: Timestamp;
@@ -40,9 +41,10 @@ export interface QuizResult {
 }
 
 // Create a new quiz session when user starts a quiz
-export async function createQuizSession(quizId: string, quizTitle: string, totalQuestions: number): Promise<string> {
+export async function createQuizSession(userId: string, quizId: string, quizTitle: string, totalQuestions: number): Promise<string> {
   try {
     const sessionData: Omit<QuizSession, 'id'> = {
+      userId,
       quizId,
       quizTitle,
       startedAt: serverTimestamp() as Timestamp,

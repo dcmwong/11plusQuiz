@@ -1,10 +1,12 @@
 import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
+import { AuthProvider } from '@/lib/auth/AuthContext'
+import { AuthGate } from '@/components/auth/AuthGate'
 
 export const metadata: Metadata = {
-  title: 'Quiz Whiz',
-  description: 'A fun and engaging quiz app',
+  title: 'Quiz Whiz - 11+ Practice',
+  description: 'Master your 11+ exams with interactive quizzes and personalized feedback',
 };
 
 export default function RootLayout({
@@ -20,8 +22,12 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body antialiased">
-        {children}
-        <Toaster />
+        <AuthProvider>
+          <AuthGate>
+            {children}
+          </AuthGate>
+          <Toaster />
+        </AuthProvider>
       </body>
     </html>
   );
