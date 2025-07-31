@@ -1,4 +1,4 @@
-import { QuizClient } from '@/components/quiz/QuizClient';
+import { QuizApp } from '@/components/quiz/QuizApp';
 import Image from 'next/image';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { app } from '@/lib/firebase/init';
@@ -9,22 +9,22 @@ async function getQuizData() {
   try {
     const quizCollection = collection(db, 'quizzes');
     const quizSnapshot = await getDocs(quizCollection);
-    const quizData = quizSnapshot.docs.map(doc => doc.data());
+    const quizData = quizSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
     return quizData;
   } catch (error) {
     console.error("Error fetching quiz data:", error);
-    // Return default quiz data if Firebase fails
+    // Return empty array if Firebase fails
     return [];
   }
 }
 
 export default async function Home() {
-  const quizData = (await getQuizData())[0];
+  const quizzes = await getQuizData();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center p-4 md:p-8">
-      <div className="w-full max-w-4xl text-center">
-        <div className="flex justify-center items-center gap-4 mb-4">
+      <div className="w-full max-w-6xl text-center">
+        <div className="flex justify-center items-center gap-4 mb-8">
           <Image
             src="https://placehold.co/100x100.png"
             alt="Quiz Whiz mascot"
@@ -44,7 +44,7 @@ export default async function Home() {
         </div>
 
         <div className="mt-8 md:mt-12">
-          <QuizClient quizData={quizData} />
+          <QuizApp quizzes={quizzes} />
         </div>
       </div>
     </main>

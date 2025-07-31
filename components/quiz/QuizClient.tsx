@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useMemo, useEffect } from 'react';
@@ -39,6 +38,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
   const [loadingFeedback, setLoadingFeedback] = useState(false);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isCreatingSession, setIsCreatingSession] = useState(true);
+  const [isSavingAnswer, setIsSavingAnswer] = useState(false);
 
   const currentQuestion = useMemo(() => questions[currentQuestionIndex], [questions, currentQuestionIndex]);
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
@@ -68,7 +68,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
     initializeSession();
   }, [title, questions.length, toast]);
 
-  // Save answer whenever an answer is selected
+  // Save answer immediately when selected (debounced to avoid excessive saves)
   useEffect(() => {
     const saveAnswer = async () => {
       if (sessionId && answers[currentQuestionIndex] && currentQuestion) {
@@ -78,24 +78,47 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
             currentQuestionIndex,
             currentQuestion.question,
             answers[currentQuestionIndex],
-            currentQuestion.correctAnswer
+            currentQuestion.correctAnswer,
           );
+          console.log(`✅ Auto-saved answer for question ${currentQuestionIndex + 1}`);
         } catch (error) {
-          console.error('Failed to save answer:', error);
+          console.error('Failed to auto-save answer:', error);
         }
       }
     };
 
-    saveAnswer();
-  }, [answers, currentQuestionIndex, sessionId, currentQuestion]);
+    // Debounce the save to avoid excessive calls
+    const timeoutId = setTimeout(saveAnswer, 500);
+    return () => clearTimeout(timeoutId);
+  }, [answers[currentQuestionIndex], sessionId, currentQuestion]);
 
   const handleAnswerSelect = (answer: string) => {
     setAnswers((prev) => ({ ...prev, [currentQuestionIndex]: answer }));
   };
 
-  const handleNext = () => {
-    if (!isLastQuestion) {
-      setCurrentQuestionIndex((prev) => prev + 1);
+  const handleNext = async () => {
+    if (!isLastQuestion && sessionId && answers[currentQuestionIndex] && currentQuestion) {
+      setIsSavingAnswer(true);
+      try {
+        // Ensure the current answer is saved before moving to next question
+        await saveQuizAnswer(
+          sessionId,
+          currentQuestionIndex,
+          currentQuestion.question,
+          answers[currentQuestionIndex],
+          currentQuestion.correctAnswer,
+        );
+        setCurrentQuestionIndex((prev) => prev + 1);
+      } catch (error) {
+        console.error('Failed to save answer before navigation:', error);
+        toast({
+          title: 'Save Error',
+          description: 'Could not save your answer. Please try again.',
+          variant: 'destructive',
+        });
+      } finally {
+        setIsSavingAnswer(false);
+      }
     }
   };
 
@@ -133,14 +156,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
       // Save complete quiz results to database
       if (sessionId) {
         try {
-          await completeQuizSession(
-            sessionId,
-            'quiz-' + Date.now(),
-            title,
-            answers,
-            questions,
-            calculatedScore,
-          );
+          await completeQuizSession(sessionId, 'quiz-' + Date.now(), title, answers, questions, calculatedScore);
           toast({
             title: 'Quiz Completed!',
             description: 'Your results have been saved successfully.',
@@ -176,15 +192,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
   };
 
   if (isFinished) {
-    return (
-      <ResultsCard
-        questions={questions}
-        answers={answers}
-        score={score}
-        feedback={feedback}
-        onRestart={handleRestart}
-      />
-    );
+    return <ResultsCard questions={questions} answers={answers} score={score} feedback={feedback} onRestart={handleRestart} />;
   }
 
   return (
@@ -201,12 +209,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
       </div>
 
       <div className="flex justify-between mt-8 max-w-2xl mx-auto">
-        <Button
-          onClick={handlePrevious}
-          disabled={currentQuestionIndex === 0 || loadingFeedback}
-          variant="outline"
-          size="lg"
-        >
+        <Button onClick={handlePrevious} disabled={currentQuestionIndex === 0 || loadingFeedback} variant="outline" size="lg">
           <ArrowLeft className="mr-2 h-5 w-5" />
           Previous
         </Button>
@@ -228,9 +231,18 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
             )}
           </Button>
         ) : (
-          <Button onClick={handleNext} disabled={loadingFeedback || !answers[currentQuestionIndex]} size="lg">
-            Next
-            <ArrowRight className="ml-2 h-5 w-5" />
+          <Button onClick={handleNext} disabled={loadingFeedback || isSavingAnswer || !answers[currentQuestionIndex]} size="lg">
+            {isSavingAnswer ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                Saving...
+              </>
+            ) : (
+              <>
+                Next
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </>
+            )}
           </Button>
         )}
       </div>

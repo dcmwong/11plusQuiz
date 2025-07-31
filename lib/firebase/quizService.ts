@@ -77,12 +77,20 @@ export async function saveQuizAnswer(
       selectedAnswer,
       correctAnswer,
       isCorrect: selectedAnswer === correctAnswer,
-      answeredAt: serverTimestamp() as Timestamp
+      answeredAt: Timestamp.fromDate(new Date())
     };
 
+    // Get current session data first
+    const sessionDoc = await getDoc(sessionRef);
+    const sessionData = sessionDoc.data() as QuizSession;
+    
+    // Update the answers array
+    const updatedAnswers = [...(sessionData?.answers || [])];
+    updatedAnswers[questionIndex] = answerData;
+    
     // Update the session with the new answer
     await updateDoc(sessionRef, {
-      [`answers.${questionIndex}`]: answerData,
+      answers: updatedAnswers,
       lastAnsweredAt: serverTimestamp()
     });
 
@@ -117,7 +125,7 @@ export async function completeQuizSession(
       selectedAnswer: answers[index] || 'Not answered',
       correctAnswer: question.correctAnswer,
       isCorrect: answers[index] === question.correctAnswer,
-      answeredAt: serverTimestamp() as Timestamp
+      answeredAt: Timestamp.fromDate(new Date())
     }));
 
     const completionTime = new Date();
