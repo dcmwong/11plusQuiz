@@ -10,7 +10,12 @@ async function getQuizData() {
   try {
     const quizCollection = collection(db, 'quizzes');
     const quizSnapshot = await getDocs(quizCollection);
-    const quizData = quizSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    const quizData = quizSnapshot.docs.map((doc) => {
+      const data = doc.data();
+      // Convert any Timestamp objects to plain objects/strings
+      const serializedData = JSON.parse(JSON.stringify(data));
+      return { id: doc.id, ...serializedData };
+    });
     console.log(quizData);
     return quizData;
   } catch (error) {
