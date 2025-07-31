@@ -156,7 +156,15 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
       // Save complete quiz results to database
       if (sessionId) {
         try {
-          await completeQuizSession(sessionId, 'quiz-' + Date.now(), title, answers, questions, calculatedScore);
+          await completeQuizSession(
+            sessionId, 
+            'quiz-' + Date.now(), 
+            title, 
+            answers, 
+            questions, 
+            calculatedScore,
+            feedback // Pass the feedback parameter
+          );
           toast({
             title: 'Quiz Completed!',
             description: 'Your results have been saved successfully.',
