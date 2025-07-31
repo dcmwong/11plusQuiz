@@ -1,6 +1,6 @@
 import { QuizApp } from '@/components/quiz/QuizApp';
 import { UserProfile } from '@/components/auth/UserProfile';
-import Image from 'next/image';
+import { MascotAvatar } from '@/components/avatars/MascotAvatar';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import { app } from '@/lib/firebase/init';
 
@@ -39,14 +39,7 @@ export default async function Home() {
       <div className="flex-1 flex flex-col items-center justify-center">
         <div className="w-full max-w-6xl text-center">
           <div className="flex justify-center items-center gap-4 mb-8">
-            <Image
-              src="https://placehold.co/100x100.png"
-              alt="Quiz Whiz mascot"
-              width={100}
-              height={100}
-              className="rounded-full"
-              data-ai-hint="cartoon brain"
-            />
+            <MascotAvatar size={100} />
             <div>
               <h1 className="text-5xl md:text-7xl font-extrabold text-primary font-headline">Quiz Whiz</h1>
               <p className="text-xl md:text-2xl text-foreground/80 mt-2">Test your knowledge and get smart feedback!</p>

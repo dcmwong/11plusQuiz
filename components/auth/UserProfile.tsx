@@ -14,6 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogOut, User, Trophy } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useRouter } from 'next/navigation';
+import { getAvatarById } from '@/components/avatars/AvatarData';
 
 export function UserProfile() {
   const { user, logout } = useAuth();
@@ -47,16 +48,33 @@ export function UserProfile() {
       .slice(0, 2);
   };
 
+  const getUserAvatar = () => {
+    if (user.photoURL?.includes('avatar-')) {
+      const avatarId = user.photoURL.replace('avatar-', '');
+      const avatar = getAvatarById(avatarId);
+      if (avatar) {
+        return (
+          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
+            {avatar.svg}
+          </div>
+        );
+      }
+    }
+    return (
+      <Avatar className="h-8 w-8">
+        <AvatarImage src={user.photoURL || ''} alt={user.displayName || 'User'} />
+        <AvatarFallback>
+          {user.displayName ? getInitials(user.displayName) : user.email?.[0]?.toUpperCase()}
+        </AvatarFallback>
+      </Avatar>
+    );
+  };
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" className="relative h-8 w-8 rounded-full">
-          <Avatar className="h-8 w-8">
-            <AvatarImage src={user.photoURL || ''} alt={user.displayName || 'User'} />
-            <AvatarFallback>
-              {user.displayName ? getInitials(user.displayName) : user.email?.[0]?.toUpperCase()}
-            </AvatarFallback>
-          </Avatar>
+          {getUserAvatar()}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -71,7 +89,7 @@ export function UserProfile() {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
+        <DropdownMenuItem onClick={() => router.push('/profile')}>
           <User className="mr-2 h-4 w-4" />
           <span>Profile</span>
         </DropdownMenuItem>
