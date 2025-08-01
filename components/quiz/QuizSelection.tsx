@@ -40,9 +40,7 @@ export const QuizSelection: React.FC<QuizSelectionProps> = ({ quizzes, onQuizSel
       <div className="text-center py-12">
         <BookOpen className="mx-auto h-12 w-12 text-muted-foreground mb-4" />
         <h3 className="text-lg font-semibold mb-2">No Quizzes Available</h3>
-        <p className="text-muted-foreground">
-          Check back later for new quizzes, or contact your administrator.
-        </p>
+        <p className="text-muted-foreground">Check back later for new quizzes, or contact your administrator.</p>
       </div>
     );
   }
@@ -51,32 +49,24 @@ export const QuizSelection: React.FC<QuizSelectionProps> = ({ quizzes, onQuizSel
     <div className="w-full max-w-4xl mx-auto">
       <div className="text-center mb-8">
         <h2 className="text-3xl font-bold mb-2">Choose Your Quiz</h2>
-        <p className="text-muted-foreground text-lg">
-          Select a quiz to test your knowledge and track your progress
-        </p>
+        <p className="text-muted-foreground text-lg">Select a quiz to test your knowledge and track your progress</p>
       </div>
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {quizzes.map((quiz, index) => (
-          <Card 
-            key={index} 
-            className="cursor-pointer transition-all hover:shadow-lg hover:scale-105 border-2 hover:border-primary/50"
+          <Card
+            key={index}
+            className="flex flex-col justify-between cursor-pointer transition-all hover:shadow-lg hover:scale-105 border-2 hover:border-primary/50"
             onClick={() => handleQuizSelect(quiz)}
           >
             <CardHeader>
               <div className="flex items-start justify-between">
                 <div className="flex-1">
-                  <CardTitle className="text-xl mb-2 line-clamp-2">
-                    {quiz.title}
-                  </CardTitle>
-                  {quiz.description && (
-                    <CardDescription className="line-clamp-3">
-                      {quiz.description}
-                    </CardDescription>
-                  )}
+                  <CardTitle className="text-xl mb-2 line-clamp-2 align-text-top">{quiz.title}</CardTitle>
+                  {quiz.description && <CardDescription className="line-clamp-3">{quiz.description}</CardDescription>}
                 </div>
               </div>
-              
+
               <div className="flex flex-wrap gap-2 mt-3">
                 {quiz.category && (
                   <Badge variant="secondary" className="text-xs">
@@ -84,10 +74,13 @@ export const QuizSelection: React.FC<QuizSelectionProps> = ({ quizzes, onQuizSel
                   </Badge>
                 )}
                 {quiz.difficulty && (
-                  <Badge 
+                  <Badge
                     variant={
-                      quiz.difficulty.toLowerCase() === 'easy' ? 'default' :
-                      quiz.difficulty.toLowerCase() === 'medium' ? 'secondary' : 'destructive'
+                      quiz.difficulty.toLowerCase() === 'easy'
+                        ? 'default'
+                        : quiz.difficulty.toLowerCase() === 'medium'
+                        ? 'secondary'
+                        : 'destructive'
                     }
                     className="text-xs"
                   >
@@ -111,8 +104,8 @@ export const QuizSelection: React.FC<QuizSelectionProps> = ({ quizzes, onQuizSel
                 )}
               </div>
 
-              <Button 
-                className="w-full" 
+              <Button
+                className="w-full"
                 size="lg"
                 onClick={(e) => {
                   e.stopPropagation();

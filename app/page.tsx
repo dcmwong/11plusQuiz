@@ -16,7 +16,6 @@ async function getQuizData() {
       const serializedData = JSON.parse(JSON.stringify(data));
       return { id: doc.id, ...serializedData };
     });
-    console.log(quizData);
     return quizData;
   } catch (error) {
     console.error('Error fetching quiz data:', error);

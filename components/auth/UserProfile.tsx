@@ -20,6 +20,7 @@ export function UserProfile() {
   const { user, logout } = useAuth();
   const { toast } = useToast();
   const router = useRouter();
+  console.log(user);
 
   if (!user) return null;
 
@@ -42,30 +43,18 @@ export function UserProfile() {
   const getInitials = (name: string) => {
     return name
       .split(' ')
-      .map(n => n[0])
+      .map((n) => n[0])
       .join('')
       .toUpperCase()
       .slice(0, 2);
   };
 
   const getUserAvatar = () => {
-    if (user.photoURL?.includes('avatar-')) {
-      const avatarId = user.photoURL.replace('avatar-', '');
-      const avatar = getAvatarById(avatarId);
-      if (avatar) {
-        return (
-          <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center overflow-hidden">
-            {avatar.svg}
-          </div>
-        );
-      }
-    }
+    const photoURL = user?.providerData?.[0]?.photoURL;
     return (
       <Avatar className="h-8 w-8">
-        <AvatarImage src={user.photoURL || ''} alt={user.displayName || 'User'} />
-        <AvatarFallback>
-          {user.displayName ? getInitials(user.displayName) : user.email?.[0]?.toUpperCase()}
-        </AvatarFallback>
+        <AvatarImage src={photoURL || ''} alt={user.displayName || 'User'} />
+        <AvatarFallback>{user.displayName ? getInitials(user.displayName) : user.email?.[0]?.toUpperCase()}</AvatarFallback>
       </Avatar>
     );
   };
@@ -80,12 +69,8 @@ export function UserProfile() {
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
-            <p className="text-sm font-medium leading-none">
-              {user.displayName || 'User'}
-            </p>
-            <p className="text-xs leading-none text-muted-foreground">
-              {user.email}
-            </p>
+            <p className="text-sm font-medium leading-none">{user.displayName || 'User'}</p>
+            <p className="text-xs leading-none text-muted-foreground">{user.email}</p>
           </div>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
