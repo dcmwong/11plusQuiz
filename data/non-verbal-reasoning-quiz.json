@@ -1,0 +1,63 @@
+{
+  "title": "Non-Verbal Reasoning Practice",
+  "category": "Non-Verbal Reasoning",
+  "difficulty": "Easy",
+  "description": "Practice pattern recognition, sequences, and logical reasoning without relying on language skills",
+  "questions": [
+    {
+      "question": "In a sequence, the first shape is a circle, the second is a square, the third is a triangle, and the fourth is a circle again. Following this pattern, what would be the 7th shape?",
+      "options": [
+        "Circle",
+        "Square", 
+        "Triangle",
+        "Pentagon",
+        "Diamond"
+      ],
+      "correctAnswer": "Triangle"
+    },
+    {
+      "question": "A box contains 12 balls arranged in 3 rows of 4 balls each. If you remove 2 balls from the first row and 1 ball from the second row, how many balls remain in the box?",
+      "options": [
+        "8 balls",
+        "9 balls",
+        "10 balls",
+        "7 balls",
+        "11 balls"
+      ],
+      "correctAnswer": "9 balls"
+    },
+    {
+      "question": "If you fold a square piece of paper in half twice and then cut a small triangle from one corner, how many holes will you see when you unfold the paper completely?",
+      "options": [
+        "2 holes",
+        "4 holes",
+        "6 holes",
+        "8 holes",
+        "1 hole"
+      ],
+      "correctAnswer": "4 holes"
+    },
+    {
+      "question": "In a grid of 16 squares (4x4), if every square in the top row is shaded and every square in the leftmost column is shaded, how many squares are shaded in total?",
+      "options": [
+        "6 squares",
+        "7 squares",
+        "8 squares",
+        "9 squares",
+        "5 squares"
+      ],
+      "correctAnswer": "7 squares"
+    },
+    {
+      "question": "A pattern shows: 2, 4, 8, 16, ?. Each number is doubled to get the next number. Following this rule, what is the next number in the sequence?",
+      "options": [
+        "24",
+        "28",
+        "32",
+        "30",
+        "26"
+      ],
+      "correctAnswer": "32"
+    }
+  ]
+}

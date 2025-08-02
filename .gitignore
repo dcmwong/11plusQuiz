@@ -5,6 +5,7 @@
 .ignore/
 .venv
 .DS_Store
+scans
 
 # dependencies
 node_modules

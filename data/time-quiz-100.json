@@ -1,0 +1,473 @@
+{
+  "title": "Time Calculations - Extended Practice",
+  "category": "Time",
+  "difficulty": "Mixed",
+  "description": "Comprehensive practice with time calculations covering various real-world scenarios",
+  "questions": [
+    {
+      "question": "Anna starts her workout at 6:15 a.m. She exercises for 45 minutes and then cools down for 10 minutes. What time does she finish?",
+      "options": ["7:10 a.m.", "7:00 a.m.", "7:05 a.m.", "7:15 a.m.", "6:55 a.m."],
+      "correctAnswer": "7:10 a.m."
+    },
+    {
+      "question": "Ben begins studying at 2:30 p.m. He studies for 1 hour and 25 minutes, then takes a 15-minute break. What time does his break end?",
+      "options": ["4:10 p.m.", "4:00 p.m.", "4:15 p.m.", "4:05 p.m.", "3:55 p.m."],
+      "correctAnswer": "4:10 p.m."
+    },
+    {
+      "question": "Carol starts cooking at 5:45 p.m. Preparation takes 30 minutes and cooking takes 1 hour and 10 minutes. What time is dinner ready?",
+      "options": ["7:25 p.m.", "7:15 p.m.", "7:30 p.m.", "7:20 p.m.", "7:35 p.m."],
+      "correctAnswer": "7:25 p.m."
+    },
+    {
+      "question": "Dave starts his commute at 7:20 a.m. The train ride takes 35 minutes and walking takes 12 minutes. What time does he arrive at work?",
+      "options": ["8:07 a.m.", "8:02 a.m.", "8:12 a.m.", "8:05 a.m.", "8:10 a.m."],
+      "correctAnswer": "8:07 a.m."
+    },
+    {
+      "question": "Eva begins her piano lesson at 3:40 p.m. The lesson lasts 50 minutes and she practices alone for 20 minutes afterward. What time does she finish?",
+      "options": ["4:50 p.m.", "5:00 p.m.", "4:55 p.m.", "5:05 p.m.", "4:45 p.m."],
+      "correctAnswer": "4:50 p.m."
+    },
+    {
+      "question": "Frank starts painting at 10:15 a.m. He paints for 2 hours and 30 minutes, then cleans up for 25 minutes. What time does he finish cleaning?",
+      "options": ["1:10 p.m.", "1:05 p.m.", "1:15 p.m.", "1:00 p.m.", "1:20 p.m."],
+      "correctAnswer": "1:10 p.m."
+    },
+    {
+      "question": "Grace starts her meeting at 11:50 a.m. The meeting runs for 1 hour and 35 minutes. What time does the meeting end?",
+      "options": ["1:25 p.m.", "1:20 p.m.", "1:30 p.m.", "1:15 p.m.", "1:35 p.m."],
+      "correctAnswer": "1:25 p.m."
+    },
+    {
+      "question": "Henry begins his lunch break at 12:25 p.m. He eats for 30 minutes and takes a 15-minute walk. What time does he return to work?",
+      "options": ["1:10 p.m.", "1:05 p.m.", "1:15 p.m.", "1:00 p.m.", "1:20 p.m."],
+      "correctAnswer": "1:10 p.m."
+    },
+    {
+      "question": "Iris starts her dance class at 4:35 p.m. The class is 1 hour and 15 minutes long, followed by a 10-minute cool-down. What time does she finish?",
+      "options": ["6:00 p.m.", "5:55 p.m.", "6:05 p.m.", "5:50 p.m.", "6:10 p.m."],
+      "correctAnswer": "6:00 p.m."
+    },
+    {
+      "question": "Jack starts his grocery shopping at 9:40 a.m. Shopping takes 55 minutes and checkout takes 8 minutes. What time does he finish?",
+      "options": ["10:43 a.m.", "10:38 a.m.", "10:48 a.m.", "10:40 a.m.", "10:45 a.m."],
+      "correctAnswer": "10:43 a.m."
+    },
+    {
+      "question": "Kate begins her book club at 7:15 p.m. The discussion lasts 1 hour and 40 minutes, then they socialize for 25 minutes. What time do they finish?",
+      "options": ["9:20 p.m.", "9:15 p.m.", "9:25 p.m.", "9:10 p.m.", "9:30 p.m."],
+      "correctAnswer": "9:20 p.m."
+    },
+    {
+      "question": "Leo starts his haircut appointment at 2:50 p.m. The haircut takes 35 minutes and styling takes 15 minutes. What time is he done?",
+      "options": ["3:40 p.m.", "3:35 p.m.", "3:45 p.m.", "3:30 p.m.", "3:50 p.m."],
+      "correctAnswer": "3:40 p.m."
+    },
+    {
+      "question": "Mia starts her yoga session at 6:25 a.m. The session lasts 1 hour and 5 minutes, followed by 15 minutes of meditation. What time does she finish?",
+      "options": ["7:45 a.m.", "7:40 a.m.", "7:50 a.m.", "7:35 a.m.", "7:55 a.m."],
+      "correctAnswer": "7:45 a.m."
+    },
+    {
+      "question": "Noah begins his car wash at 1:15 p.m. Washing takes 25 minutes and waxing takes 40 minutes. What time does he finish?",
+      "options": ["2:20 p.m.", "2:15 p.m.", "2:25 p.m.", "2:10 p.m.", "2:30 p.m."],
+      "correctAnswer": "2:20 p.m."
+    },
+    {
+      "question": "Olivia starts her tutoring session at 4:10 p.m. The session lasts 1 hour and 20 minutes, then she reviews notes for 10 minutes. What time does she finish?",
+      "options": ["5:40 p.m.", "5:35 p.m.", "5:45 p.m.", "5:30 p.m.", "5:50 p.m."],
+      "correctAnswer": "5:40 p.m."
+    },
+    {
+      "question": "Peter starts his garden work at 8:30 a.m. He works for 2 hours and 15 minutes, then waters plants for 20 minutes. What time does he finish?",
+      "options": ["11:05 a.m.", "11:00 a.m.", "11:10 a.m.", "10:55 a.m.", "11:15 a.m."],
+      "correctAnswer": "11:05 a.m."
+    },
+    {
+      "question": "Quinn starts her pottery class at 3:45 p.m. The class runs for 1 hour and 30 minutes, then cleanup takes 15 minutes. What time is she done?",
+      "options": ["5:30 p.m.", "5:25 p.m.", "5:35 p.m.", "5:20 p.m.", "5:40 p.m."],
+      "correctAnswer": "5:30 p.m."
+    },
+    {
+      "question": "Ryan begins his bike ride at 7:05 a.m. He rides for 45 minutes, rests for 10 minutes, then rides for another 30 minutes. What time does he finish?",
+      "options": ["8:30 a.m.", "8:25 a.m.", "8:35 a.m.", "8:20 a.m.", "8:40 a.m."],
+      "correctAnswer": "8:30 a.m."
+    },
+    {
+      "question": "Sophie starts her swimming lesson at 5:20 p.m. The lesson lasts 50 minutes and she showers for 15 minutes afterward. What time is she ready to leave?",
+      "options": ["6:25 p.m.", "6:20 p.m.", "6:30 p.m.", "6:15 p.m.", "6:35 p.m."],
+      "correctAnswer": "6:25 p.m."
+    },
+    {
+      "question": "Tom starts his photography session at 10:40 a.m. Setup takes 20 minutes, shooting takes 1 hour and 45 minutes, and packing takes 15 minutes. What time does he finish?",
+      "options": ["1:00 p.m.", "12:55 p.m.", "1:05 p.m.", "12:50 p.m.", "1:10 p.m."],
+      "correctAnswer": "1:00 p.m."
+    },
+    {
+      "question": "Uma begins her violin practice at 4:55 p.m. She practices scales for 20 minutes and pieces for 40 minutes. What time does she finish?",
+      "options": ["5:55 p.m.", "5:50 p.m.", "6:00 p.m.", "5:45 p.m.", "6:05 p.m."],
+      "correctAnswer": "5:55 p.m."
+    },
+    {
+      "question": "Victor starts his woodworking project at 9:25 a.m. Cutting takes 45 minutes, assembly takes 1 hour and 10 minutes, and finishing takes 25 minutes. What time is he done?",
+      "options": ["11:45 a.m.", "11:40 a.m.", "11:50 a.m.", "11:35 a.m.", "11:55 a.m."],
+      "correctAnswer": "11:45 a.m."
+    },
+    {
+      "question": "Wendy starts her baking session at 1:35 p.m. Mixing takes 15 minutes, baking takes 55 minutes, and cooling takes 30 minutes. What time are the cookies ready?",
+      "options": ["3:15 p.m.", "3:10 p.m.", "3:20 p.m.", "3:05 p.m.", "3:25 p.m."],
+      "correctAnswer": "3:15 p.m."
+    },
+    {
+      "question": "Xavier begins his chess tournament match at 2:20 p.m. The match lasts 2 hours and 25 minutes. What time does it end?",
+      "options": ["4:45 p.m.", "4:40 p.m.", "4:50 p.m.", "4:35 p.m.", "4:55 p.m."],
+      "correctAnswer": "4:45 p.m."
+    },
+    {
+      "question": "Yara starts her laundry at 11:15 a.m. Washing takes 35 minutes, drying takes 50 minutes, and folding takes 20 minutes. What time is she finished?",
+      "options": ["1:00 p.m.", "12:55 p.m.", "1:05 p.m.", "12:50 p.m.", "1:10 p.m."],
+      "correctAnswer": "1:00 p.m."
+    },
+    {
+      "question": "Zoe begins her art project at 3:30 p.m. Sketching takes 25 minutes, painting takes 1 hour and 15 minutes, and cleanup takes 10 minutes. What time does she finish?",
+      "options": ["5:20 p.m.", "5:15 p.m.", "5:25 p.m.", "5:10 p.m.", "5:30 p.m."],
+      "correctAnswer": "5:20 p.m."
+    },
+    {
+      "question": "Adam starts his morning jog at 6:45 a.m. He jogs for 25 minutes, stretches for 10 minutes, and walks home for 8 minutes. What time does he arrive home?",
+      "options": ["7:28 a.m.", "7:23 a.m.", "7:33 a.m.", "7:25 a.m.", "7:30 a.m."],
+      "correctAnswer": "7:28 a.m."
+    },
+    {
+      "question": "Bella begins her Spanish lesson at 7:40 p.m. The lesson lasts 1 hour and 10 minutes, followed by 15 minutes of homework review. What time does she finish?",
+      "options": ["9:05 p.m.", "9:00 p.m.", "9:10 p.m.", "8:55 p.m.", "9:15 p.m."],
+      "correctAnswer": "9:05 p.m."
+    },
+    {
+      "question": "Chris starts his computer programming session at 10:50 a.m. He codes for 1 hour and 35 minutes, then debugs for 25 minutes. What time does he finish?",
+      "options": ["12:50 p.m.", "12:45 p.m.", "12:55 p.m.", "12:40 p.m.", "1:00 p.m."],
+      "correctAnswer": "12:50 p.m."
+    },
+    {
+      "question": "Diana starts her house cleaning at 9:15 a.m. Kitchen takes 30 minutes, living room takes 25 minutes, and bathrooms take 35 minutes. What time does she finish?",
+      "options": ["10:45 a.m.", "10:40 a.m.", "10:50 a.m.", "10:35 a.m.", "10:55 a.m."],
+      "correctAnswer": "10:45 a.m."
+    },
+    {
+      "question": "Eric begins his guitar lesson at 4:25 p.m. The lesson lasts 45 minutes and practice afterward takes 30 minutes. What time is he done?",
+      "options": ["5:40 p.m.", "5:35 p.m.", "5:45 p.m.", "5:30 p.m.", "5:50 p.m."],
+      "correctAnswer": "5:40 p.m."
+    },
+    {
+      "question": "Fiona starts her tennis match at 6:10 p.m. The first set takes 35 minutes, the second set takes 42 minutes, and cool-down takes 8 minutes. What time does she finish?",
+      "options": ["7:35 p.m.", "7:30 p.m.", "7:40 p.m.", "7:25 p.m.", "7:45 p.m."],
+      "correctAnswer": "7:35 p.m."
+    },
+    {
+      "question": "George starts his fishing trip at 5:30 a.m. He fishes for 2 hours and 15 minutes, then packs up for 20 minutes. What time does he leave?",
+      "options": ["8:05 a.m.", "8:00 a.m.", "8:10 a.m.", "7:55 a.m.", "8:15 a.m."],
+      "correctAnswer": "8:05 a.m."
+    },
+    {
+      "question": "Hannah begins her cake decorating at 1:45 p.m. Base decorating takes 40 minutes, detail work takes 55 minutes, and final touches take 15 minutes. What time is she done?",
+      "options": ["3:35 p.m.", "3:30 p.m.", "3:40 p.m.", "3:25 p.m.", "3:45 p.m."],
+      "correctAnswer": "3:35 p.m."
+    },
+    {
+      "question": "Ian starts his dog training session at 11:20 a.m. Basic commands take 30 minutes, tricks take 25 minutes, and playtime takes 15 minutes. What time does the session end?",
+      "options": ["12:30 p.m.", "12:25 p.m.", "12:35 p.m.", "12:20 p.m.", "12:40 p.m."],
+      "correctAnswer": "12:30 p.m."
+    },
+    {
+      "question": "Julia begins her sewing project at 2:55 p.m. Cutting fabric takes 20 minutes, sewing takes 1 hour and 25 minutes, and pressing takes 10 minutes. What time does she finish?",
+      "options": ["4:50 p.m.", "4:45 p.m.", "4:55 p.m.", "4:40 p.m.", "5:00 p.m."],
+      "correctAnswer": "4:50 p.m."
+    },
+    {
+      "question": "Kevin starts his car maintenance at 8:40 a.m. Oil change takes 25 minutes, tire rotation takes 30 minutes, and washing takes 20 minutes. What time is he finished?",
+      "options": ["9:55 a.m.", "9:50 a.m.", "10:00 a.m.", "9:45 a.m.", "10:05 a.m."],
+      "correctAnswer": "9:55 a.m."
+    },
+    {
+      "question": "Luna starts her meditation retreat at 7:00 a.m. Morning meditation is 45 minutes, walking meditation is 30 minutes, and closing meditation is 20 minutes. What time does she finish?",
+      "options": ["8:35 a.m.", "8:30 a.m.", "8:40 a.m.", "8:25 a.m.", "8:45 a.m."],
+      "correctAnswer": "8:35 a.m."
+    },
+    {
+      "question": "Mark begins his home repair project at 10:25 a.m. Preparation takes 35 minutes, repair work takes 1 hour and 40 minutes, and cleanup takes 15 minutes. What time does he finish?",
+      "options": ["12:55 p.m.", "12:50 p.m.", "1:00 p.m.", "12:45 p.m.", "1:05 p.m."],
+      "correctAnswer": "12:55 p.m."
+    },
+    {
+      "question": "Nina starts her flower arranging class at 3:15 p.m. The lesson lasts 1 hour and 20 minutes, then she works on her arrangement for 25 minutes. What time does she finish?",
+      "options": ["5:00 p.m.", "4:55 p.m.", "5:05 p.m.", "4:50 p.m.", "5:10 p.m."],
+      "correctAnswer": "5:00 p.m."
+    },
+    {
+      "question": "Oscar begins his basketball practice at 4:45 p.m. Warmup takes 15 minutes, drills take 1 hour, and scrimmage takes 30 minutes. What time does practice end?",
+      "options": ["6:30 p.m.", "6:25 p.m.", "6:35 p.m.", "6:20 p.m.", "6:40 p.m."],
+      "correctAnswer": "6:30 p.m."
+    },
+    {
+      "question": "Penny starts her jewelry making workshop at 1:30 p.m. Design takes 20 minutes, crafting takes 1 hour and 15 minutes, and finishing takes 10 minutes. What time is she done?",
+      "options": ["3:15 p.m.", "3:10 p.m.", "3:20 p.m.", "3:05 p.m.", "3:25 p.m."],
+      "correctAnswer": "3:15 p.m."
+    },
+    {
+      "question": "Quinn starts his video editing session at 9:35 p.m. Rough cut takes 45 minutes, fine editing takes 1 hour and 10 minutes, and rendering takes 20 minutes. What time does he finish?",
+      "options": ["11:50 p.m.", "11:45 p.m.", "11:55 p.m.", "11:40 p.m.", "12:00 a.m."],
+      "correctAnswer": "11:50 p.m."
+    },
+    {
+      "question": "Rita begins her pottery wheel session at 6:20 p.m. Centering clay takes 10 minutes, shaping takes 35 minutes, and trimming takes 20 minutes. What time does she finish?",
+      "options": ["7:25 p.m.", "7:20 p.m.", "7:30 p.m.", "7:15 p.m.", "7:35 p.m."],
+      "correctAnswer": "7:25 p.m."
+    },
+    {
+      "question": "Sam starts his marathon training run at 5:45 a.m. He runs for 1 hour and 50 minutes, then stretches for 15 minutes. What time does he finish?",
+      "options": ["7:50 a.m.", "7:45 a.m.", "7:55 a.m.", "7:40 a.m.", "8:00 a.m."],
+      "correctAnswer": "7:50 a.m."
+    },
+    {
+      "question": "Tina begins her calligraphy practice at 2:40 p.m. Basic strokes take 25 minutes, letters take 40 minutes, and words take 30 minutes. What time does she finish?",
+      "options": ["4:15 p.m.", "4:10 p.m.", "4:20 p.m.", "4:05 p.m.", "4:25 p.m."],
+      "correctAnswer": "4:15 p.m."
+    },
+    {
+      "question": "Ulysses starts his boat maintenance at 8:15 a.m. Hull cleaning takes 1 hour and 20 minutes, engine check takes 40 minutes, and equipment check takes 25 minutes. What time is he done?",
+      "options": ["10:40 a.m.", "10:35 a.m.", "10:45 a.m.", "10:30 a.m.", "10:50 a.m."],
+      "correctAnswer": "10:40 a.m."
+    },
+    {
+      "question": "Vera begins her knitting circle at 7:25 p.m. Social time is 15 minutes, knitting instruction is 45 minutes, and free knitting is 35 minutes. What time does it end?",
+      "options": ["9:00 p.m.", "8:55 p.m.", "9:05 p.m.", "8:50 p.m.", "9:10 p.m."],
+      "correctAnswer": "9:00 p.m."
+    },
+    {
+      "question": "Will starts his rock climbing session at 11:30 a.m. Gear setup takes 15 minutes, climbing takes 1 hour and 25 minutes, and packing takes 10 minutes. What time does he leave?",
+      "options": ["1:20 p.m.", "1:15 p.m.", "1:25 p.m.", "1:10 p.m.", "1:30 p.m."],
+      "correctAnswer": "1:20 p.m."
+    },
+    {
+      "question": "Xara begins her origami workshop at 3:50 p.m. Basic folds take 20 minutes, first project takes 35 minutes, and second project takes 40 minutes. What time does she finish?",
+      "options": ["5:25 p.m.", "5:20 p.m.", "5:30 p.m.", "5:15 p.m.", "5:35 p.m."],
+      "correctAnswer": "5:25 p.m."
+    },
+    {
+      "question": "Yuki starts her ice skating lesson at 4:05 p.m. Warm-up takes 10 minutes, instruction takes 40 minutes, and free skate takes 25 minutes. What time does she finish?",
+      "options": ["5:20 p.m.", "5:15 p.m.", "5:25 p.m.", "5:10 p.m.", "5:30 p.m."],
+      "correctAnswer": "5:20 p.m."
+    },
+    {
+      "question": "Zack begins his archery practice at 10:10 a.m. Setup takes 10 minutes, practice rounds take 1 hour and 15 minutes, and cleanup takes 5 minutes. What time is he done?",
+      "options": ["11:40 a.m.", "11:35 a.m.", "11:45 a.m.", "11:30 a.m.", "11:50 a.m."],
+      "correctAnswer": "11:40 a.m."
+    },
+    {
+      "question": "Alice starts her morning routine at 6:30 a.m. Shower takes 15 minutes, breakfast takes 20 minutes, and getting dressed takes 12 minutes. What time is she ready?",
+      "options": ["7:17 a.m.", "7:12 a.m.", "7:22 a.m.", "7:15 a.m.", "7:20 a.m."],
+      "correctAnswer": "7:17 a.m."
+    },
+    {
+      "question": "Bob begins his evening walk at 8:25 p.m. He walks for 35 minutes, sits in the park for 15 minutes, then walks home for 20 minutes. What time does he arrive home?",
+      "options": ["9:35 p.m.", "9:30 p.m.", "9:40 p.m.", "9:25 p.m.", "9:45 p.m."],
+      "correctAnswer": "9:35 p.m."
+    },
+    {
+      "question": "Chloe starts her makeup session at 7:40 a.m. Foundation takes 8 minutes, eye makeup takes 15 minutes, and finishing touches take 7 minutes. What time is she done?",
+      "options": ["8:10 a.m.", "8:05 a.m.", "8:15 a.m.", "8:00 a.m.", "8:20 a.m."],
+      "correctAnswer": "8:10 a.m."
+    },
+    {
+      "question": "Derek begins his podcast recording at 2:15 p.m. Setup takes 10 minutes, recording takes 1 hour and 35 minutes, and post-production takes 40 minutes. What time does he finish?",
+      "options": ["4:40 p.m.", "4:35 p.m.", "4:45 p.m.", "4:30 p.m.", "4:50 p.m."],
+      "correctAnswer": "4:40 p.m."
+    },
+    {
+      "question": "Emma starts her horseback riding lesson at 5:55 p.m. Tacking up takes 15 minutes, riding takes 45 minutes, and untacking takes 10 minutes. What time does she finish?",
+      "options": ["7:05 p.m.", "7:00 p.m.", "7:10 p.m.", "6:55 p.m.", "7:15 p.m."],
+      "correctAnswer": "7:05 p.m."
+    },
+    {
+      "question": "Felix begins his board game session at 1:20 p.m. Game setup takes 15 minutes, first game takes 55 minutes, and second game takes 40 minutes. What time do they finish?",
+      "options": ["3:10 p.m.", "3:05 p.m.", "3:15 p.m.", "3:00 p.m.", "3:20 p.m."],
+      "correctAnswer": "3:10 p.m."
+    },
+    {
+      "question": "Grace starts her bubble tea making at 4:15 p.m. Brewing tea takes 20 minutes, preparing toppings takes 15 minutes, and assembly takes 8 minutes. What time is it ready?",
+      "options": ["4:58 p.m.", "4:53 p.m.", "5:03 p.m.", "4:55 p.m.", "5:00 p.m."],
+      "correctAnswer": "4:58 p.m."
+    },
+    {
+      "question": "Henry begins his magic trick practice at 6:50 p.m. Card tricks take 25 minutes, coin tricks take 20 minutes, and rope tricks take 30 minutes. What time does he finish?",
+      "options": ["8:05 p.m.", "8:00 p.m.", "8:10 p.m.", "7:55 p.m.", "8:15 p.m."],
+      "correctAnswer": "8:05 p.m."
+    },
+    {
+      "question": "Ivy starts her flower pressing session at 11:45 a.m. Selecting flowers takes 10 minutes, arranging takes 25 minutes, and pressing setup takes 15 minutes. What time does she finish setup?",
+      "options": ["12:35 p.m.", "12:30 p.m.", "12:40 p.m.", "12:25 p.m.", "12:45 p.m."],
+      "correctAnswer": "12:35 p.m."
+    },
+    {
+      "question": "Jake begins his skateboard practice at 3:25 p.m. Basic tricks take 30 minutes, advanced tricks take 45 minutes, and cool-down takes 10 minutes. What time does he finish?",
+      "options": ["4:50 p.m.", "4:45 p.m.", "4:55 p.m.", "4:40 p.m.", "5:00 p.m."],
+      "correctAnswer": "4:50 p.m."
+    },
+    {
+      "question": "Kara starts her soap making workshop at 9:20 a.m. Melting base takes 15 minutes, adding ingredients takes 20 minutes, and molding takes 25 minutes. What time does she finish?",
+      "options": ["10:20 a.m.", "10:15 a.m.", "10:25 a.m.", "10:10 a.m.", "10:30 a.m."],
+      "correctAnswer": "10:20 a.m."
+    },
+    {
+      "question": "Liam begins his drone flying session at 5:35 p.m. Setup takes 10 minutes, practice flights take 40 minutes, and packing takes 8 minutes. What time does he finish?",
+      "options": ["6:33 p.m.", "6:28 p.m.", "6:38 p.m.", "6:30 p.m.", "6:35 p.m."],
+      "correctAnswer": "6:33 p.m."
+    },
+    {
+      "question": "Maya starts her candle making class at 2:05 p.m. Wax preparation takes 30 minutes, pouring takes 15 minutes, and decoration takes 35 minutes. What time is she done?",
+      "options": ["3:25 p.m.", "3:20 p.m.", "3:30 p.m.", "3:15 p.m.", "3:35 p.m."],
+      "correctAnswer": "3:25 p.m."
+    },
+    {
+      "question": "Noah begins his model building session at 7:15 p.m. Parts preparation takes 20 minutes, assembly takes 1 hour and 10 minutes, and detailing takes 25 minutes. What time does he finish?",
+      "options": ["9:10 p.m.", "9:05 p.m.", "9:15 p.m.", "9:00 p.m.", "9:20 p.m."],
+      "correctAnswer": "9:10 p.m."
+    },
+    {
+      "question": "Olivia starts her embroidery project at 1:50 p.m. Pattern transfer takes 15 minutes, stitching takes 1 hour and 20 minutes, and finishing takes 10 minutes. What time is she done?",
+      "options": ["3:35 p.m.", "3:30 p.m.", "3:40 p.m.", "3:25 p.m.", "3:45 p.m."],
+      "correctAnswer": "3:35 p.m."
+    },
+    {
+      "question": "Paul begins his telescope setup at 9:40 p.m. Assembly takes 15 minutes, calibration takes 20 minutes, and first observations take 45 minutes. What time does his first session end?",
+      "options": ["11:00 p.m.", "10:55 p.m.", "11:05 p.m.", "10:50 p.m.", "11:10 p.m."],
+      "correctAnswer": "11:00 p.m."
+    },
+    {
+      "question": "Quinn starts her cheese making workshop at 10:30 a.m. Heating milk takes 25 minutes, adding cultures takes 10 minutes, and pressing takes 1 hour and 15 minutes. What time is the pressing done?",
+      "options": ["12:20 p.m.", "12:15 p.m.", "12:25 p.m.", "12:10 p.m.", "12:30 p.m."],
+      "correctAnswer": "12:20 p.m."
+    },
+    {
+      "question": "Ryan begins his disc golf round at 4:20 p.m. The front nine takes 45 minutes, break takes 10 minutes, and back nine takes 50 minutes. What time does he finish?",
+      "options": ["6:05 p.m.", "6:00 p.m.", "6:10 p.m.", "5:55 p.m.", "6:15 p.m."],
+      "correctAnswer": "6:05 p.m."
+    },
+    {
+      "question": "Sarah starts her bird watching expedition at 6:15 a.m. Hiking to spot takes 25 minutes, observation takes 1 hour and 30 minutes, and hiking back takes 30 minutes. What time does she return?",
+      "options": ["8:40 a.m.", "8:35 a.m.", "8:45 a.m.", "8:30 a.m.", "8:50 a.m."],
+      "correctAnswer": "8:40 a.m."
+    },
+    {
+      "question": "Tyler begins his home brewing session at 11:55 a.m. Sanitizing takes 20 minutes, brewing takes 2 hours and 10 minutes, and cleanup takes 30 minutes. What time does he finish?",
+      "options": ["2:55 p.m.", "2:50 p.m.", "3:00 p.m.", "2:45 p.m.", "3:05 p.m."],
+      "correctAnswer": "2:55 p.m."
+    },
+    {
+      "question": "Uma starts her henna design session at 3:40 p.m. Design preparation takes 15 minutes, application takes 40 minutes, and drying time is 35 minutes. What time is the design ready?",
+      "options": ["5:10 p.m.", "5:05 p.m.", "5:15 p.m.", "5:00 p.m.", "5:20 p.m."],
+      "correctAnswer": "5:10 p.m."
+    },
+    {
+      "question": "Victor begins his geocaching adventure at 1:25 p.m. Finding the first cache takes 35 minutes, second cache takes 28 minutes, and third cache takes 42 minutes. What time does he find the third cache?",
+      "options": ["3:10 p.m.", "3:05 p.m.", "3:15 p.m.", "3:00 p.m.", "3:20 p.m."],
+      "correctAnswer": "3:10 p.m."
+    },
+    {
+      "question": "Wendy starts her macrame workshop at 6:45 p.m. Learning basic knots takes 20 minutes, practicing takes 30 minutes, and creating a project takes 50 minutes. What time does she finish?",
+      "options": ["8:25 p.m.", "8:20 p.m.", "8:30 p.m.", "8:15 p.m.", "8:35 p.m."],
+      "correctAnswer": "8:25 p.m."
+    },
+    {
+      "question": "Xavier begins his metal detecting session at 8:50 a.m. Setup takes 10 minutes, first hour of searching takes 60 minutes, and second hour takes 55 minutes. What time does he finish searching?",
+      "options": ["10:55 a.m.", "10:50 a.m.", "11:00 a.m.", "10:45 a.m.", "11:05 a.m."],
+      "correctAnswer": "10:55 a.m."
+    },
+    {
+      "question": "Yara starts her kombucha brewing at 12:30 p.m. Tea preparation takes 30 minutes, cooling takes 45 minutes, and adding SCOBY takes 15 minutes. What time is the initial setup complete?",
+      "options": ["2:00 p.m.", "1:55 p.m.", "2:05 p.m.", "1:50 p.m.", "2:10 p.m."],
+      "correctAnswer": "2:00 p.m."
+    },
+    {
+      "question": "Zoe begins her sand sculpture building at 10:15 a.m. Base building takes 40 minutes, detailed carving takes 1 hour and 15 minutes, and finishing touches take 20 minutes. What time does she finish?",
+      "options": ["12:30 p.m.", "12:25 p.m.", "12:35 p.m.", "12:20 p.m.", "12:40 p.m."],
+      "correctAnswer": "12:30 p.m."
+    },
+    {
+      "question": "Alex starts his morning meditation at 5:50 a.m. Breathing exercises take 10 minutes, guided meditation takes 25 minutes, and reflection takes 15 minutes. What time does he finish?",
+      "options": ["6:40 a.m.", "6:35 a.m.", "6:45 a.m.", "6:30 a.m.", "6:50 a.m."],
+      "correctAnswer": "6:40 a.m."
+    },
+    {
+      "question": "Beth begins her pie baking at 2:45 p.m. Making crust takes 30 minutes, preparing filling takes 25 minutes, and baking takes 1 hour and 10 minutes. What time is the pie done?",
+      "options": ["4:50 p.m.", "4:45 p.m.", "4:55 p.m.", "4:40 p.m.", "5:00 p.m."],
+      "correctAnswer": "4:50 p.m."
+    },
+    {
+      "question": "Carl starts his CrossFit workout at 7:30 a.m. Warm-up takes 15 minutes, main workout takes 35 minutes, and cool-down takes 10 minutes. What time does he finish?",
+      "options": ["8:30 a.m.", "8:25 a.m.", "8:35 a.m.", "8:20 a.m.", "8:40 a.m."],
+      "correctAnswer": "8:30 a.m."
+    },
+    {
+      "question": "Dana begins her scrapbooking session at 4:35 p.m. Photo selection takes 20 minutes, layout design takes 35 minutes, and assembly takes 40 minutes. What time does she finish?",
+      "options": ["6:10 p.m.", "6:05 p.m.", "6:15 p.m.", "6:00 p.m.", "6:20 p.m."],
+      "correctAnswer": "6:10 p.m."
+    },
+    {
+      "question": "Ethan starts his stand-up comedy practice at 8:15 p.m. Writing material takes 25 minutes, rehearsing takes 35 minutes, and timing takes 15 minutes. What time does he finish?",
+      "options": ["9:30 p.m.", "9:25 p.m.", "9:35 p.m.", "9:20 p.m.", "9:40 p.m."],
+      "correctAnswer": "9:30 p.m."
+    },
+    {
+      "question": "Faye begins her terrarium making workshop at 11:40 a.m. Container preparation takes 15 minutes, layering takes 25 minutes, and planting takes 30 minutes. What time does she finish?",
+      "options": ["12:50 p.m.", "12:45 p.m.", "12:55 p.m.", "12:40 p.m.", "1:00 p.m."],
+      "correctAnswer": "12:50 p.m."
+    },
+    {
+      "question": "Gary starts his home theater setup at 3:20 p.m. Equipment installation takes 1 hour and 15 minutes, cable management takes 30 minutes, and testing takes 25 minutes. What time is he done?",
+      "options": ["5:30 p.m.", "5:25 p.m.", "5:35 p.m.", "5:20 p.m.", "5:40 p.m."],
+      "correctAnswer": "5:30 p.m."
+    },
+    {
+      "question": "Holly begins her beekeeping inspection at 9:05 a.m. Suiting up takes 10 minutes, hive inspection takes 45 minutes, and recording notes takes 15 minutes. What time does she finish?",
+      "options": ["10:15 a.m.", "10:10 a.m.", "10:20 a.m.", "10:05 a.m.", "10:25 a.m."],
+      "correctAnswer": "10:15 a.m."
+    },
+    {
+      "question": "Ivan starts his mushroom foraging expedition at 7:25 a.m. Hiking to location takes 35 minutes, foraging takes 1 hour and 20 minutes, and hiking back takes 40 minutes. What time does he return?",
+      "options": ["10:00 a.m.", "9:55 a.m.", "10:05 a.m.", "9:50 a.m.", "10:10 a.m."],
+      "correctAnswer": "10:00 a.m."
+    },
+    {
+      "question": "Jenna begins her wine tasting event at 6:30 p.m. Introduction takes 15 minutes, tasting five wines takes 1 hour and 25 minutes, and discussion takes 20 minutes. What time does the event end?",
+      "options": ["8:30 p.m.", "8:25 p.m.", "8:35 p.m.", "8:20 p.m.", "8:40 p.m."],
+      "correctAnswer": "8:30 p.m."
+    },
+    {
+      "question": "Kyle starts his lock picking practice at 1:55 p.m. Basic locks take 20 minutes, intermediate locks take 35 minutes, and advanced locks take 40 minutes. What time does he finish?",
+      "options": ["3:30 p.m.", "3:25 p.m.", "3:35 p.m.", "3:20 p.m.", "3:40 p.m."],
+      "correctAnswer": "3:30 p.m."
+    },
+    {
+      "question": "Luna begins her crystal healing session at 4:50 p.m. Setup takes 10 minutes, meditation takes 30 minutes, and energy work takes 25 minutes. What time does the session end?",
+      "options": ["5:55 p.m.", "5:50 p.m.", "6:00 p.m.", "5:45 p.m.", "6:05 p.m."],
+      "correctAnswer": "5:55 p.m."
+    },
+    {
+      "question": "Mason starts his blacksmithing class at 10:45 a.m. Safety briefing takes 15 minutes, basic techniques take 1 hour and 30 minutes, and project completion takes 45 minutes. What time does he finish?",
+      "options": ["1:15 p.m.", "1:10 p.m.", "1:20 p.m.", "1:05 p.m.", "1:25 p.m."],
+      "correctAnswer": "1:15 p.m."
+    },
+    {
+      "question": "Nora begins her urban sketching session at 2:20 p.m. Finding location takes 10 minutes, first sketch takes 40 minutes, and second sketch takes 35 minutes. What time does she finish?",
+      "options": ["3:45 p.m.", "3:40 p.m.", "3:50 p.m.", "3:35 p.m.", "3:55 p.m."],
+      "correctAnswer": "3:45 p.m."
+    },
+    {
+      "question": "Owen starts his kite flying session at 11:30 a.m. Assembly takes 15 minutes, initial flights take 45 minutes, and advanced maneuvers take 30 minutes. What time does he finish?",
+      "options": ["1:00 p.m.", "12:55 p.m.", "1:05 p.m.", "12:50 p.m.", "1:10 p.m."],
+      "correctAnswer": "1:00 p.m."
+    }
+  ]
+}

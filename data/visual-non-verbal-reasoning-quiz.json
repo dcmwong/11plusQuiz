@@ -1,0 +1,223 @@
+{
+  "title": "Visual Non-Verbal Reasoning",
+  "category": "Non-Verbal Reasoning",
+  "difficulty": "Mixed",
+  "description": "Visual pattern recognition and logical reasoning using shapes, symbols, and patterns",
+  "questions": [
+    {
+      "question": "Look at this pattern: ○ □ △ ○ □ ?\n\nWhat comes next?",
+      "options": [
+        "△",
+        "○",
+        "□",
+        "◊",
+        "★"
+      ],
+      "correctAnswer": "△"
+    },
+    {
+      "question": "Study this sequence: ◼ ◼ ◻ ◼ ◼ ◻ ◼ ◼ ?\n\nWhat should replace the question mark?",
+      "options": [
+        "◼",
+        "◻",
+        "◊",
+        "●",
+        "△"
+      ],
+      "correctAnswer": "◻"
+    },
+    {
+      "question": "Number sequence in boxes:\n\n[2] [4] [8] [16] [?]\n\nWhat number should be in the last box?",
+      "options": [
+        "24",
+        "32",
+        "20",
+        "18",
+        "28"
+      ],
+      "correctAnswer": "32"
+    },
+    {
+      "question": "Shape progression: ● ◐ ○ ● ◐ ?\n\n(● = filled circle, ◐ = half-filled circle, ○ = empty circle)\n\nWhat comes next?",
+      "options": [
+        "○",
+        "●",
+        "◐",
+        "◊",
+        "□"
+      ],
+      "correctAnswer": "○"
+    },
+    {
+      "question": "Look at the pattern image showing rotating arrows.\n\nIf the pattern continues, which direction will the 6th arrow point?",
+      "imageUrl": "/images/arrow-rotation-pattern.png",
+      "options": [
+        "↑ (Up)",
+        "→ (Right)",
+        "↓ (Down)",
+        "← (Left)",
+        "↗ (Diagonal up-right)"
+      ],
+      "correctAnswer": "→ (Right)"
+    },
+    {
+      "question": "Grid pattern:\n\n■ □ ■\n□ ■ □\n■ ? ■\n\nWhat should replace the question mark?",
+      "options": [
+        "■",
+        "□",
+        "●",
+        "△",
+        "◊"
+      ],
+      "correctAnswer": "□"
+    },
+    {
+      "question": "Size sequence: ● ◉ ● ◉ ?\n\n(● = small dot, ◉ = large dot)\n\nWhat comes next?",
+      "options": [
+        "●",
+        "◉",
+        "○",
+        "◐",
+        "◊"
+      ],
+      "correctAnswer": "●"
+    },
+    {
+      "question": "Examine the domino pattern image. Each domino shows a different dot arrangement.\n\nWhich domino should complete the sequence?",
+      "imageUrl": "/images/domino-sequence-pattern.png",
+      "options": [
+        "Domino with 3|4 dots",
+        "Domino with 2|5 dots",
+        "Domino with 1|6 dots",
+        "Domino with 4|3 dots",
+        "Domino with 5|2 dots"
+      ],
+      "correctAnswer": "Domino with 2|5 dots"
+    },
+    {
+      "question": "Symbol matrix:\n\n+ × +\n× + ×\n+ × ?\n\nWhat symbol should replace the question mark?",
+      "options": [
+        "+",
+        "×",
+        "○",
+        "□",
+        "△"
+      ],
+      "correctAnswer": "+"
+    },
+    {
+      "question": "Triangle arrangement:\n\n   △\n  △ △\n △   △\n△  ?  △\n\nWhat should be in the center of the bottom row?",
+      "options": [
+        "△",
+        "▽",
+        "○",
+        "□",
+        "Nothing (empty space)"
+      ],
+      "correctAnswer": "△"
+    },
+    {
+      "question": "Study the folded paper diagram showing cuts made while folded.\n\nWhen unfolded, how many holes will appear in the paper?",
+      "imageUrl": "/images/paper-folding-cuts.png",
+      "options": [
+        "2 holes",
+        "4 holes",
+        "6 holes",
+        "8 holes",
+        "3 holes"
+      ],
+      "correctAnswer": "4 holes"
+    },
+    {
+      "question": "Direction arrows: ↑ → ↓ ← ↑ → ↓ ?\n\nWhat direction should the next arrow point?",
+      "options": [
+        "↑",
+        "→",
+        "↓",
+        "←",
+        "↗"
+      ],
+      "correctAnswer": "←"
+    },
+    {
+      "question": "Number pyramid:\n\n    4\n   2 2\n  1 ? 1\n\nWhat number should replace the question mark?",
+      "options": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correctAnswer": "1"
+    },
+    {
+      "question": "Examine the cube net diagram showing how a cube unfolds.\n\nIf this net were folded into a cube, which face would be opposite to the starred face?",
+      "imageUrl": "/images/cube-net-pattern.png",
+      "options": [
+        "Face with circle",
+        "Face with square",
+        "Face with triangle",
+        "Face with cross",
+        "Face with diamond"
+      ],
+      "correctAnswer": "Face with triangle"
+    },
+    {
+      "question": "Clock positions: 🕐 🕒 🕓 🕕 ?\n\n(1 o'clock, 3 o'clock, 4 o'clock, 6 o'clock, ?)\n\nWhat time should come next following the pattern?",
+      "options": [
+        "🕖 (7 o'clock)",
+        "🕘 (9 o'clock)",
+        "🕙 (10 o'clock)",
+        "🕐 (1 o'clock)",
+        "🕛 (12 o'clock)"
+      ],
+      "correctAnswer": "🕘 (9 o'clock)"
+    },
+    {
+      "question": "Shape counting:\n\n◆ ◆ ◇\n◇ ◆ ◇\n◆ ◇ ?\n\nIn each row and column, there are 2 filled diamonds (◆) and 1 empty diamond (◇). What should replace the question mark?",
+      "options": [
+        "◆",
+        "◇",
+        "○",
+        "□",
+        "△"
+      ],
+      "correctAnswer": "◆"
+    },
+    {
+      "question": "Study the mirror reflection image showing a shape and its reflection.\n\nWhich option shows the correct mirror image of the given L-shape?",
+      "imageUrl": "/images/mirror-reflection-L-shape.png",
+      "options": [
+        "L-shape rotated 90° clockwise",
+        "L-shape rotated 180°",
+        "L-shape flipped horizontally",
+        "L-shape flipped vertically",
+        "L-shape rotated 90° counterclockwise"
+      ],
+      "correctAnswer": "L-shape flipped horizontally"
+    },
+    {
+      "question": "Overlapping shapes:\n\n○ overlapping □ = ⊡\n\nIf △ overlaps ○, what symbol represents this?",
+      "options": [
+        "⊙",
+        "⊖",
+        "⊕",
+        "⊗",
+        "⊘"
+      ],
+      "correctAnswer": "⊙"
+    },
+    {
+      "question": "Examine the 3D cube rotation sequence showing a cube with different symbols on each face.\n\nBased on the rotation pattern, which symbol will be on top after the next rotation?",
+      "imageUrl": "/images/cube-rotation-sequence.png",
+      "options": [
+        "★ (Star)",
+        "● (Circle)",
+        "■ (Square)",
+        "▲ (Triangle)",
+        "♦ (Diamond)"
+      ],
+      "correctAnswer": "▲ (Triangle)"
+    }
+  ]
+}

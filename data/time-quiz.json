@@ -1,0 +1,96 @@
+{
+  "title": "Time Calculations",
+  "category": "Time",
+  "difficulty": "Easy",
+  "description": "Practice calculating elapsed time with real-world scenarios",
+  "questions": [
+    {
+      "question": "Sarah starts reading a book at 3:20 p.m. She reads for 1 hour and 30 minutes. Then, she takes a 20-minute nap. What time does she wake up from her nap?",
+      "options": [
+        "4:50 p.m.",
+        "4:40 p.m.", 
+        "4:55 p.m.",
+        "5:00 p.m.",
+        "5:10 p.m."
+      ],
+      "correctAnswer": "5:10 p.m."
+    },
+    {
+      "question": "Mike begins cooking dinner at 6:10 p.m. The cooking takes 1 hour and 20 minutes. Then, he spends 15 minutes setting the table. What time does he finish setting the table?",
+      "options": [
+        "7:30 p.m.",
+        "7:35 p.m.",
+        "7:45 p.m.",
+        "7:25 p.m.",
+        "7:40 p.m."
+      ],
+      "correctAnswer": "7:45 p.m."
+    },
+    {
+      "question": "Emma starts her piano practice at 4:45 p.m. She practices for 50 minutes and takes a 10-minute break. What time does she finish her practice?",
+      "options": [
+        "5:45 p.m.",
+        "5:35 p.m.",
+        "5:55 p.m.",
+        "5:00 p.m.",
+        "6:00 p.m."
+      ],
+      "correctAnswer": "5:45 p.m."
+    },
+    {
+      "question": "David starts his morning run at 7:00 a.m. He runs for 30 minutes and then spends 15 minutes stretching. What time does he finish stretching?",
+      "options": [
+        "8:00 a.m.",
+        "7:30 a.m.",
+        "7:45 a.m.",
+        "7:50 a.m.",
+        "8:15 a.m."
+      ],
+      "correctAnswer": "7:45 a.m."
+    },
+    {
+      "question": "Lisa starts her art class at 2:15 p.m. The class lasts for 2 hours and 30 minutes. Then, she stays for an additional 25 minutes to clean up. What time does she finish cleaning up?",
+      "options": [
+        "5:00 p.m.",
+        "5:10 p.m.",
+        "4:45 p.m.",
+        "5:15 p.m.",
+        "4:50 p.m."
+      ],
+      "correctAnswer": "5:10 p.m."
+    },
+    {
+      "question": "Tom begins studying at 8:25 a.m. He studies for 2 hours and 40 minutes, then takes a 30-minute lunch break. What time does he finish his lunch break?",
+      "options": [
+        "11:35 a.m.",
+        "11:05 a.m.",
+        "12:05 p.m.",
+        "11:25 a.m.",
+        "12:15 p.m."
+      ],
+      "correctAnswer": "11:35 a.m."
+    },
+    {
+      "question": "Rachel starts her yoga session at 9:30 a.m. The session lasts for 1 hour and 15 minutes. Afterward, she meditates for 20 minutes. What time does she finish meditating?",
+      "options": [
+        "11:05 a.m.",
+        "10:45 a.m.",
+        "11:00 a.m.",
+        "10:50 a.m.",
+        "11:15 a.m."
+      ],
+      "correctAnswer": "11:05 a.m."
+    },
+    {
+      "question": "James starts watching a movie at 7:20 p.m. The movie is 2 hours and 35 minutes long. Then, he spends 10 minutes discussing it with friends. What time does he finish the discussion?",
+      "options": [
+        "10:05 p.m.",
+        "9:55 p.m.",
+        "10:00 p.m.",
+        "10:15 p.m.",
+        "9:45 p.m."
+      ],
+      "correctAnswer": "10:05 p.m."
+    }
+  ]
+}
