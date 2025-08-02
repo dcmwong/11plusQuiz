@@ -9,16 +9,25 @@ import { ResultsCard } from './ResultsCard';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 import { Loader2, ArrowLeft, ArrowRight } from 'lucide-react';
-import { createQuizSession, saveQuizAnswer, completeQuizSession } from '@/lib/firebase/quizService';
+import {
+  createQuizSession,
+  saveQuizAnswer,
+  completeQuizSession,
+  selectQuestions,
+  markQuestionsAsAnswered,
+  getUserQuizProgress,
+} from '@/lib/firebase/quizService';
 import { useAuth } from '@/lib/auth/AuthContext';
 
 interface Question {
   question: string;
   options: string[];
   correctAnswer: string;
+  originalIndex?: number; // Track original index for progress tracking
 }
 
 interface QuizData {
+  id?: string;
   title: string;
   questions: Question[];
 }
@@ -28,10 +37,12 @@ interface QuizClientProps {
 }
 
 export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
-  const { title, questions } = quizData;
+  const { title, questions: allQuestions, id } = quizData;
   const { toast } = useToast();
   const { user } = useAuth();
 
+  const [selectedQuestions, setSelectedQuestions] = useState<Question[]>([]);
+  const [selectedIndices, setSelectedIndices] = useState<number[]>([]);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
@@ -41,15 +52,80 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isCreatingSession, setIsCreatingSession] = useState(true);
   const [isSavingAnswer, setIsSavingAnswer] = useState(false);
+  const [isSelectingQuestions, setIsSelectingQuestions] = useState(true);
 
+  // Use selected questions for the quiz, fallback to all questions if not set
+  const questions = selectedQuestions.length > 0 ? selectedQuestions : allQuestions;
   const currentQuestion = useMemo(() => questions[currentQuestionIndex], [questions, currentQuestionIndex]);
   const isLastQuestion = currentQuestionIndex === questions.length - 1;
 
-  // Create quiz session when component mounts
+  // Select questions when component mounts
+  useEffect(() => {
+    const setupQuiz = async () => {
+      if (!user) {
+        console.log('⏳ No user yet, waiting...');
+        return;
+      }
+
+      if (!id) {
+        console.log('⚠️ No quiz ID provided, using all questions');
+        // If no quiz ID, use all questions (fallback mode)
+        setSelectedQuestions(allQuestions.slice(0, 10)); // Still limit to 10 for consistency
+        setSelectedIndices(allQuestions.slice(0, 10).map((_, index) => index));
+        setIsSelectingQuestions(false);
+        return;
+      }
+
+      try {
+        console.log('📝 Selecting questions for quiz:', id, 'user:', user.uid);
+        console.log('📊 Total questions available:', allQuestions.length);
+        
+        const questionSelection = await selectQuestions(user.uid, id, allQuestions, 10);
+        setSelectedQuestions(questionSelection.selectedQuestions);
+        setSelectedIndices(questionSelection.selectedIndices);
+
+        // Get progress info for toast
+        const progress = await getUserQuizProgress(user.uid, id);
+        const answeredCount = progress?.answeredQuestionIndices?.length || 0;
+        const totalQuestions = allQuestions.length;
+
+        console.log('✅ Question selection completed:', {
+          selected: questionSelection.selectedQuestions.length,
+          answered: answeredCount,
+          total: totalQuestions,
+          selectedIndices: questionSelection.selectedIndices
+        });
+
+        toast({
+          title: 'Questions Selected!', 
+          description: `Selected ${questionSelection.selectedQuestions.length} new questions. You've completed ${answeredCount}/${totalQuestions} total questions.`,
+        });
+      } catch (error) {
+        console.error('❌ Failed to select questions:', error);
+        // Fallback to first 10 questions if selection fails
+        const fallbackQuestions = allQuestions.slice(0, 10);
+        setSelectedQuestions(fallbackQuestions);
+        setSelectedIndices(fallbackQuestions.map((_, index) => index));
+        toast({
+          title: 'Notice',
+          description: 'Using first 10 questions as question selection failed.',
+          variant: 'default',
+        });
+      } finally {
+        setIsSelectingQuestions(false);
+      }
+    };
+
+    if (user && allQuestions.length > 0) {
+      setupQuiz();
+    }
+  }, [user, id, allQuestions, toast]);
+
+  // Create quiz session when questions are selected
   useEffect(() => {
     const initializeSession = async () => {
       if (!user) return;
-      
+
       try {
         const newSessionId = await createQuizSession(user.uid, 'quiz-' + Date.now(), title, questions.length);
         setSessionId(newSessionId);
@@ -133,7 +209,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
   };
 
   const handleFinish = async () => {
-    // setLoadingFeedback(true);
+    setLoadingFeedback(true);
 
     let calculatedScore = 0;
     questions.forEach((q, index) => {
@@ -161,17 +237,24 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
       if (sessionId) {
         try {
           await completeQuizSession(
-            sessionId, 
-            'quiz-' + Date.now(), 
-            title, 
-            answers, 
-            questions, 
+            sessionId,
+            id || 'quiz-' + Date.now(),
+            title,
+            answers,
+            questions,
             calculatedScore,
-            feedback // Pass the feedback parameter
+            feedback, // Pass the feedback parameter
           );
+
+          // Mark questions as answered for progress tracking
+          if (user && id && selectedIndices.length > 0) {
+            await markQuestionsAsAnswered(user.uid, id, title, selectedIndices);
+            console.log('✅ Marked questions as answered for progress tracking');
+          }
+
           toast({
             title: 'Quiz Completed!',
-            description: 'Your results have been saved successfully.',
+            description: 'Your results have been saved and progress updated.',
           });
         } catch (error) {
           console.error('Failed to save quiz results:', error);
@@ -191,7 +274,7 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
       });
     } finally {
       setIsFinished(true);
-      // setLoadingFeedback(false);
+      setLoadingFeedback(false);
     }
   };
 
@@ -202,6 +285,23 @@ export const QuizClient: FC<QuizClientProps> = ({ quizData }) => {
     setScore(0);
     setFeedback('');
   };
+
+  if (isSelectingQuestions || !user) {
+    return (
+      <div className="w-full flex flex-col items-center justify-center min-h-[400px]">
+        <Loader2 className="h-8 w-8 animate-spin mb-4" />
+        <h3 className="text-lg font-semibold mb-2">
+          {!user ? 'Loading...' : 'Selecting Questions'}
+        </h3>
+        <p className="text-muted-foreground text-center">
+          {!user 
+            ? 'Please wait while we set up your quiz...' 
+            : 'We\'re preparing 10 personalized questions for you based on your progress...'
+          }
+        </p>
+      </div>
+    );
+  }
 
   if (isFinished) {
     return <ResultsCard questions={questions} answers={answers} score={score} feedback={feedback} onRestart={handleRestart} />;

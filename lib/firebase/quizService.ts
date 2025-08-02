@@ -41,6 +41,22 @@ export interface QuizResult {
   feedback?: string;
 }
 
+// New interface for tracking user progress per quiz
+export interface UserQuizProgress {
+  id?: string;
+  userId: string;
+  quizId: string;
+  quizTitle: string;
+  answeredQuestionIndices: number[]; // Array of question indices that have been answered
+  lastUpdated: Timestamp;
+}
+
+// Interface for question selection
+export interface QuestionSelection {
+  selectedQuestions: any[];
+  selectedIndices: number[];
+}
+
 // Create a new quiz session when user starts a quiz
 export async function createQuizSession(userId: string, quizId: string, quizTitle: string, totalQuestions: number): Promise<string> {
   try {
@@ -280,6 +296,168 @@ export async function getUserQuizStats(userId: string): Promise<{
     };
   } catch (error) {
     console.error('❌ Error fetching user quiz stats:', error);
+    throw error;
+  }
+}
+
+// Get user's progress for a specific quiz
+export async function getUserQuizProgress(userId: string, quizId: string): Promise<UserQuizProgress | null> {
+  try {
+    console.log('🔍 Fetching quiz progress for user:', userId, 'quiz:', quizId);
+    
+    const progressQuery = query(
+      collection(db, 'userQuizProgress'),
+      where('userId', '==', userId),
+      where('quizId', '==', quizId)
+    );
+    
+    const snapshot = await getDocs(progressQuery);
+    
+    if (snapshot.empty) {
+      console.log('📊 No progress found for this quiz');
+      return null;
+    }
+    
+    const doc = snapshot.docs[0];
+    return {
+      id: doc.id,
+      ...doc.data()
+    } as UserQuizProgress;
+  } catch (error) {
+    console.error('❌ Error fetching user quiz progress:', error);
+    throw error;
+  }
+}
+
+// Update user's progress for a specific quiz
+export async function updateUserQuizProgress(
+  userId: string,
+  quizId: string,
+  quizTitle: string,
+  answeredQuestionIndices: number[]
+): Promise<void> {
+  try {
+    console.log('💾 Updating quiz progress for user:', userId, 'answered questions:', answeredQuestionIndices);
+    
+    // First, try to find existing progress
+    const existingProgress = await getUserQuizProgress(userId, quizId);
+    
+    if (existingProgress?.id) {
+      // Update existing progress
+      const progressRef = doc(db, 'userQuizProgress', existingProgress.id);
+      await updateDoc(progressRef, {
+        answeredQuestionIndices,
+        lastUpdated: serverTimestamp()
+      });
+      console.log('✅ Updated existing quiz progress');
+    } else {
+      // Create new progress record
+      const progressData: Omit<UserQuizProgress, 'id'> = {
+        userId,
+        quizId,
+        quizTitle,
+        answeredQuestionIndices,
+        lastUpdated: serverTimestamp() as Timestamp
+      };
+      
+      await addDoc(collection(db, 'userQuizProgress'), progressData);
+      console.log('✅ Created new quiz progress record');
+    }
+  } catch (error) {
+    console.error('❌ Error updating user quiz progress:', error);
+    throw error;
+  }
+}
+
+// Select questions for quiz, excluding already answered ones
+export async function selectQuestions(
+  userId: string,
+  quizId: string,
+  allQuestions: any[],
+  maxQuestions: number = 10
+): Promise<QuestionSelection> {
+  try {
+    console.log('🎯 Selecting questions for user:', userId, 'from', allQuestions.length, 'total questions');
+    
+    // Get user's progress to see which questions they've already answered
+    const progress = await getUserQuizProgress(userId, quizId);
+    const answeredIndices = progress?.answeredQuestionIndices || [];
+    
+    console.log('📝 User has already answered questions at indices:', answeredIndices);
+    
+    // Get indices of unanswered questions
+    const unansweredIndices = allQuestions
+      .map((_, index) => index)
+      .filter(index => !answeredIndices.includes(index));
+    
+    console.log('❓ Available unanswered questions:', unansweredIndices.length);
+    
+    // If we don't have enough unanswered questions, reset progress and use all questions
+    let selectedIndices: number[];
+    if (unansweredIndices.length < maxQuestions) {
+      console.log('🔄 Not enough unanswered questions, resetting progress and using all questions');
+      // Reset the user's progress for this quiz
+      await updateUserQuizProgress(userId, quizId, '', []);
+      
+      // Shuffle all question indices and take the first maxQuestions
+      const allIndices = allQuestions.map((_, index) => index);
+      selectedIndices = shuffleArray(allIndices).slice(0, maxQuestions);
+    } else {
+      // Randomly select from unanswered questions
+      selectedIndices = shuffleArray(unansweredIndices).slice(0, maxQuestions);
+    }
+    
+    // Get the actual questions using selected indices
+    const selectedQuestions = selectedIndices.map(index => ({
+      ...allQuestions[index],
+      originalIndex: index // Keep track of original index for progress tracking
+    }));
+    
+    console.log('✅ Selected', selectedQuestions.length, 'questions at indices:', selectedIndices);
+    
+    return {
+      selectedQuestions,
+      selectedIndices
+    };
+  } catch (error) {
+    console.error('❌ Error selecting questions:', error);
+    throw error;
+  }
+}
+
+// Utility function to shuffle an array
+function shuffleArray<T>(array: T[]): T[] {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+}
+
+// Mark questions as answered after quiz completion
+export async function markQuestionsAsAnswered(
+  userId: string,
+  quizId: string,
+  quizTitle: string,
+  questionIndices: number[]
+): Promise<void> {
+  try {
+    console.log('✅ Marking questions as answered:', questionIndices);
+    
+    // Get existing progress
+    const progress = await getUserQuizProgress(userId, quizId);
+    const existingAnswered = progress?.answeredQuestionIndices || [];
+    
+    // Combine existing and new answered questions, removing duplicates
+    const allAnsweredIndices = [...new Set([...existingAnswered, ...questionIndices])];
+    
+    // Update progress
+    await updateUserQuizProgress(userId, quizId, quizTitle, allAnsweredIndices);
+    
+    console.log('✅ Updated answered questions. Total answered:', allAnsweredIndices.length);
+  } catch (error) {
+    console.error('❌ Error marking questions as answered:', error);
     throw error;
   }
 }

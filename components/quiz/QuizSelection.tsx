@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,15 +25,27 @@ interface Quiz {
 
 interface QuizSelectionProps {
   quizzes: Quiz[];
-  onQuizSelect: (quiz: Quiz) => void;
+  onQuizSelect?: (quiz: Quiz) => void; // Made optional for backward compatibility
 }
 
 export const QuizSelection: React.FC<QuizSelectionProps> = ({ quizzes, onQuizSelect }) => {
+  const router = useRouter();
   const [selectedQuiz, setSelectedQuiz] = useState<Quiz | null>(null);
 
   const handleQuizSelect = (quiz: Quiz) => {
     setSelectedQuiz(quiz);
-    onQuizSelect(quiz);
+
+    if (onQuizSelect) {
+      // If callback provided, use it (for backward compatibility)
+      onQuizSelect(quiz);
+    } else {
+      // Otherwise, navigate to the quiz page
+      if (quiz.id) {
+        router.push(`/quiz/${quiz.id}`);
+      } else {
+        console.error('Quiz ID is missing, cannot navigate');
+      }
+    }
   };
 
   if (quizzes.length === 0) {
@@ -91,11 +104,11 @@ export const QuizSelection: React.FC<QuizSelectionProps> = ({ quizzes, onQuizSel
             </CardHeader>
 
             <CardContent>
-              <div className="flex items-center justify-between text-sm text-muted-foreground mb-4">
-                <div className="flex items-center gap-1">
-                  <BookOpen className="h-4 w-4" />
-                  <span>{quiz.questions.length} questions</span>
-                </div>
+              <div className="w-full flex justify-end text-sm text-muted-foreground mb-4">
+                {/* <div className="hidden flex items-center gap-1"> */}
+                {/*   <BookOpen className="h-4 w-4" /> */}
+                {/*   <span>{quiz.questions.length} questions</span> */}
+                {/* </div> */}
                 {quiz.estimatedTime && (
                   <div className="flex items-center gap-1">
                     <Clock className="h-4 w-4" />

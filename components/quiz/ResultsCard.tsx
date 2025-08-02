@@ -2,10 +2,11 @@
 'use client';
 
 import type { FC } from 'react';
-import { CheckCircle2, XCircle, BrainCircuit } from 'lucide-react';
+import { CheckCircle2, XCircle, BrainCircuit, BookOpen } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import Link from 'next/link';
 
 interface Question {
   question: string;
@@ -85,10 +86,16 @@ export const ResultsCard: FC<ResultsCardProps> = ({
           </Accordion>
         </div>
       </CardContent>
-      <CardFooter className="justify-center">
-        <Button onClick={onRestart} size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-xl font-bold py-8 px-10">
+      <CardFooter className="justify-center space-x-4">
+        <Button onClick={onRestart} size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground text-xl font-bold py-6 px-8">
           Play Again
         </Button>
+        <Link href="/quiz-selection">
+          <Button variant="outline" size="lg" className="text-xl font-bold py-6 px-8">
+            <BookOpen className="mr-2 h-5 w-5" />
+            Try Another Quiz
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );
